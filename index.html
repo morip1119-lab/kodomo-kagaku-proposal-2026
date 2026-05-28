@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>子ども化学チャンネル コンテンツ企画提案書 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    font-size: 11pt;
+    color: #111;
+    background: #fff;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 52px;
+    line-height: 1.7;
+  }
+
+  /* ── タイポグラフィ ── */
+  h1 { font-size: 22pt; font-weight: 800; color: #111; margin-bottom: 6px; }
+  h2 { font-size: 15pt; font-weight: 700; color: #111; margin: 36px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #e0e0e0; }
+  h3 { font-size: 12.5pt; font-weight: 700; color: #111; margin: 20px 0 8px; }
+  p  { margin-bottom: 10px; }
+  ul { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 5px; }
+
+  /* ── ヘッダー ── */
+  .doc-header {
+    border-bottom: 3px solid #111;
+    padding-bottom: 22px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .doc-label {
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #2563EB;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .doc-meta { font-size: 10pt; text-align: right; color: #555; line-height: 1.8; }
+
+  /* ── 概要バナー ── */
+  .summary-box {
+    background: #F8FAFF;
+    border: 1px solid #C7D9F8;
+    border-left: 5px solid #2563EB;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .summary-box p { margin-bottom: 6px; font-size: 11pt; }
+
+  /* ── シリーズカード ── */
+  .series-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .series-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .series-header.long-header  { background: #EFF6FF; border-bottom: 1px solid #BFDBFE; }
+  .series-header.short-header { background: #F0FDF4; border-bottom: 1px solid #BBF7D0; }
+  .format-badge {
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .badge-long  { background: #2563EB; color: #fff; }
+  .badge-short { background: #16A34A; color: #fff; }
+  .series-title { font-size: 14pt; font-weight: 800; color: #111; }
+  .series-tagline { font-size: 10.5pt; color: #444; margin-left: auto; font-style: italic; }
+
+  .series-body { padding: 22px 24px; }
+  .series-concept {
+    background: #fafafa;
+    border-left: 3px solid #aaa;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 11pt;
+    color: #333;
+    border-radius: 0 4px 4px 0;
+  }
+  .series-concept strong { color: #111; }
+
+  /* ── 構成フロー ── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 14px 0 20px;
+  }
+  .flow-step {
+    background: #111;
+    color: #fff;
+    font-size: 10pt;
+    font-weight: 700;
+    padding: 7px 14px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    font-size: 13pt;
+    color: #888;
+    padding: 0 6px;
+  }
+
+  /* ── テーブル ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+    margin: 10px 0 16px;
+  }
+  th {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 10pt;
+    color: #111;
+  }
+  td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    vertical-align: top;
+    color: #111;
+  }
+  tr:nth-child(even) td { background: #fafafa; }
+
+  /* ── 事件カード ── */
+  .incident-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0 16px;
+  }
+  .incident-card {
+    background: #FFFBEB;
+    border: 1px solid #FCD34D;
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+  .incident-label {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #92400E;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .incident-title { font-size: 11pt; font-weight: 700; color: #111; margin-bottom: 4px; }
+  .incident-theme { font-size: 10pt; color: #555; }
+
+  /* ── 深掘り事例ボックス ── */
+  .case-study {
+    background: #F5F3FF;
+    border: 1px solid #C4B5FD;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 14px 0 6px;
+  }
+  .case-study-label {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #6D28D9;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .case-study h4 { font-size: 12pt; font-weight: 700; color: #111; margin-bottom: 10px; }
+  .case-study p  { font-size: 10.5pt; margin-bottom: 6px; }
+
+  /* ── ショートアイデア ── */
+  .short-ideas { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+  .short-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 9px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
+  }
+  .short-num {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #2563EB;
+    min-width: 24px;
+    padding-top: 1px;
+  }
+  .short-text { font-size: 10.5pt; flex: 1; }
+  .short-text .thumb { font-size: 9.5pt; color: #555; margin-top: 2px; }
+
+  /* ── メリットボックス ── */
+  .merit-box {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-size: 10.5pt;
+    color: #14532D;
+  }
+  .merit-box strong { color: #15803D; }
+
+  /* ── ベンチマーク ── */
+  .benchmark-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 12px 0;
+  }
+  .bm-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 14px 16px;
+    background: #fafafa;
+  }
+  .bm-card .bm-label { font-size: 9pt; color: #888; margin-bottom: 4px; }
+  .bm-card .bm-name  { font-size: 11pt; font-weight: 700; color: #111; margin-bottom: 6px; }
+  .bm-card .bm-url   { font-size: 9pt; color: #2563EB; word-break: break-all; }
+
+  .ref-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 12px 0;
+  }
+  .ref-card {
+    border: 1px solid #BFDBFE;
+    border-radius: 6px;
+    padding: 12px 14px;
+    background: #EFF6FF;
+  }
+  .ref-card .ref-label { font-size: 9pt; color: #1E40AF; margin-bottom: 4px; font-weight: 600; }
+  .ref-card .ref-url   { font-size: 9pt; color: #1D4ED8; word-break: break-all; }
+
+  /* ── まとめ表 ── */
+  .overview-table th { background: #111; color: #fff; }
+  .badge-l { display:inline-block; background:#2563EB; color:#fff; font-size:9pt; font-weight:700; padding:2px 8px; border-radius:10px; }
+  .badge-s { display:inline-block; background:#16A34A; color:#fff; font-size:9pt; font-weight:700; padding:2px 8px; border-radius:10px; }
+
+  hr { border: none; border-top: 1px solid #e0e0e0; margin: 32px 0; }
+  footer { font-size: 9pt; color: #888; margin-top: 28px; padding-top: 16px; border-top: 1px solid #e0e0e0; }
+
+  /* ── KPIグリッド ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .kpi-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px 14px;
+    background: #fff;
+    text-align: center;
+  }
+  .kpi-card.warn { background: #FFFBEB; border-color: #FCD34D; }
+  .kpi-value { font-size: 22pt; font-weight: 800; color: #111; line-height: 1.2; }
+  .kpi-value.warn { color: #D97706; }
+  .kpi-label { font-size: 9pt; color: #555; margin-top: 4px; }
+  .kpi-label.warn { color: #D97706; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     ヘッダー
+══════════════════════════════════════════ -->
+<div class="doc-header">
+  <div>
+    <div class="doc-label">Content Strategy Proposal</div>
+    <h1>子ども化学チャンネル<br>コンテンツ企画提案書</h1>
+  </div>
+  <div class="doc-meta">
+    2026年5月
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     概要
+══════════════════════════════════════════ -->
+<div class="summary-box">
+  <p><strong>本提案の方針：</strong>これまでの「実験動画の紹介」から一歩進み、<strong>チャンネルに明確な"番組としての個性"</strong>を持たせることを目的とした企画群です。</p>
+  <p>ロング動画3シリーズ（月1本ペース）とショート動画2シリーズ（月1本ペース）を組み合わせ、継続的に視聴者が「また見たい」と思える設計にしています。</p>
+</div>
+
+<!-- ══════════════════════════════════════════
+     チャンネル現況データ
+══════════════════════════════════════════ -->
+<h2>チャンネル現況（直近90日 アナリティクス）</h2>
+
+<h3>チャンネル概況</h3>
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-value">16,736</div>
+    <div class="kpi-label">総視聴回数</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">186<span style="font-size:13pt">回/日</span></div>
+    <div class="kpi-label">平均日次視聴数</div>
+  </div>
+  <div class="kpi-card warn">
+    <div class="kpi-value warn">99<span style="font-size:13pt">名</span></div>
+    <div class="kpi-label warn">新規登録者（要改善）</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">3.34<span style="font-size:13pt">%</span></div>
+    <div class="kpi-label">平均CTR</div>
+  </div>
+</div>
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-value">91,814</div>
+    <div class="kpi-label">総インプレッション数</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">464.7<span style="font-size:13pt">時間</span></div>
+    <div class="kpi-label">総再生時間</div>
+  </div>
+  <div class="kpi-card warn">
+    <div class="kpi-value warn">23<span style="font-size:13pt">%</span></div>
+    <div class="kpi-label warn">平均視聴維持率（目標40%）</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">58.3<span style="font-size:13pt">%</span></div>
+    <div class="kpi-label">男性視聴者比率</div>
+  </div>
+</div>
+
+<h3>動画別パフォーマンス（直近90日・上位8本）</h3>
+<table>
+  <tr>
+    <th>動画タイトル</th>
+    <th>公開日</th>
+    <th>視聴回数</th>
+    <th>CTR</th>
+    <th>登録者増加</th>
+  </tr>
+  <tr style="background:#FFFBEB;">
+    <td><strong>【自由研究に迷ったらコレ！】元気先生が教える1日でできる化学実験ベスト5</strong></td>
+    <td>2025年7月</td>
+    <td><strong>3,864回</strong></td>
+    <td>3.21%</td>
+    <td><strong>+14名</strong></td>
+  </tr>
+  <tr>
+    <td>振るだけ簡単！ペットボトルと生クリームで激うま手作りバターを作ろう！</td>
+    <td>2026年3月</td>
+    <td>1,506回</td>
+    <td>3.95%</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td>茶色いうがい薬の色が消える！？おうちにあるアレで、色が消えちゃう大実験！</td>
+    <td>2026年4月</td>
+    <td>1,500回</td>
+    <td>2.82%</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td>まるで超能力！風船と静電気で水を自由自在に動かす簡単おうち実験</td>
+    <td>2026年2月</td>
+    <td>1,247回</td>
+    <td>2.28%</td>
+    <td>+1名</td>
+  </tr>
+  <tr>
+    <td>【衝撃】磁石を食べる！？意思を持つ「最強磁性スライム」を作ってみた！</td>
+    <td>2026年3月</td>
+    <td>1,056回</td>
+    <td>4.37%</td>
+    <td>+1名</td>
+  </tr>
+  <tr>
+    <td>飲んでおいしい！映える！虹色のジュースの作り方（Shorts）</td>
+    <td>2025年8月</td>
+    <td>949回</td>
+    <td>4.91%</td>
+    <td>+4名</td>
+  </tr>
+  <tr>
+    <td>食べられる！ぷるぷるカラフル人工イクラの作り方（Shorts）</td>
+    <td>2025年8月</td>
+    <td>673回</td>
+    <td>10.3%</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td>【化学実験#01】キッチンにあるもので『水と油』を仲良くする方法を探そう！</td>
+    <td>2022年7月</td>
+    <td>533回</td>
+    <td>3.3%</td>
+    <td>+7名</td>
+  </tr>
+</table>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     全体マップ
+══════════════════════════════════════════ -->
+<h2>企画全体マップ</h2>
+<table class="overview-table">
+  <tr>
+    <th>シリーズ名</th>
+    <th>形式</th>
+    <th>頻度</th>
+    <th>ターゲット</th>
+    <th>最大の強み</th>
+  </tr>
+  <tr>
+    <td><strong>① 化学で謎解き！</strong></td>
+    <td><span class="badge-l">LONG</span></td>
+    <td>月1本</td>
+    <td>小学生全般</td>
+    <td>視聴維持率◎ ストーリー没入型</td>
+  </tr>
+  <tr>
+    <td><strong>② 化学でお悩み解決</strong></td>
+    <td><span class="badge-l">LONG</span></td>
+    <td>月1本</td>
+    <td>小学生＋保護者</td>
+    <td>教育委員会・企業協賛との相性◎</td>
+  </tr>
+  <tr>
+    <td><strong>③ 化学クイズ番組</strong></td>
+    <td><span class="badge-l">LONG</span></td>
+    <td>月1本</td>
+    <td>小学生全般</td>
+    <td>コメント・参加型でエンゲージ◎</td>
+  </tr>
+  <tr>
+    <td><strong>④ 学校では教えない化学</strong></td>
+    <td><span class="badge-s">SHORT</span></td>
+    <td>月1本</td>
+    <td>小学生〜保護者</td>
+    <td>シェアされやすい・禁断感フック</td>
+  </tr>
+  <tr>
+    <td><strong>⑤ 体の中の化学</strong></td>
+    <td><span class="badge-s">SHORT</span></td>
+    <td>月1本</td>
+    <td>小学生〜中学生</td>
+    <td>AI映像と相性◎ 当事者感が強い</td>
+  </tr>
+</table>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     シリーズ① 化学で謎解き
+══════════════════════════════════════════ -->
+<div class="series-card">
+  <div class="series-header long-header">
+    <span class="format-badge badge-long">LONG 月1本</span>
+    <span class="series-title">① 化学で謎解き！</span>
+    <span class="series-tagline">身近な"謎"を化学で解決する探偵番組</span>
+  </div>
+  <div class="series-body">
+
+    <div class="series-concept">
+      <strong>コンセプト：</strong>「実験をやってみた」ではなく「事件を解決する」というストーリー仕立て。子どもが化学探偵になって毎回ひとつの謎を解く。コナン・名探偵フォーマットで、視聴維持率を高める設計。
+    </div>
+
+    <h3>動画の構成フロー（毎回固定）</h3>
+    <div class="flow">
+      <div class="flow-step">事件発生</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">なぜ？</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">容疑者3つ</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">実験で検証</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">犯人判明</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">化学の解説</div>
+    </div>
+    <p style="font-size:10pt; color:#555;">冒頭に謎を提示することで「結果が知りたい」という心理が働き、動画の最後まで離脱を防ぎやすい構成です。</p>
+
+    <h3>企画例</h3>
+    <div class="incident-grid">
+      <div class="incident-card">
+        <div class="incident-label">事件 01</div>
+        <div class="incident-title">コーラのシュワシュワが消えた</div>
+        <div class="incident-theme">化学テーマ：二酸化炭素の溶解・気体の逃げ方</div>
+      </div>
+      <div class="incident-card">
+        <div class="incident-label">事件 02</div>
+        <div class="incident-title">お弁当が2時間で腐った</div>
+        <div class="incident-theme">化学テーマ：細菌・腐敗・防腐の化学</div>
+      </div>
+      <div class="incident-card">
+        <div class="incident-label">事件 03</div>
+        <div class="incident-title">牛乳に酢を入れたら固まった</div>
+        <div class="incident-theme">化学テーマ：タンパク質の変性（カゼイン）</div>
+      </div>
+      <div class="incident-card">
+        <div class="incident-label">事件 04</div>
+        <div class="incident-title">手洗い石けんと体洗い石けんの違いは何か</div>
+        <div class="incident-theme">化学テーマ：界面活性剤・pH・成分比較</div>
+      </div>
+      <div class="incident-card">
+        <div class="incident-label">事件 05</div>
+        <div class="incident-title">牛乳が固まった！？白い液体の事件簿</div>
+        <div class="incident-theme">化学テーマ：コロイド・タンパク質の変性</div>
+      </div>
+      <div class="incident-card">
+        <div class="incident-label">事件 06</div>
+        <div class="incident-title">インクに隠れた色を暴け！</div>
+        <div class="incident-theme">化学テーマ：ペーパークロマトグラフィー</div>
+      </div>
+    </div>
+
+    <div class="case-study">
+      <div class="case-study-label">深掘り事例</div>
+      <h4>「科捜研になろう！犯人が書いた水性ペンを特定せよ」</h4>
+      <p><strong>化学テーマ：</strong>ペーパークロマトグラフィー（物質の分離）</p>
+      <p><strong>導入：</strong>「誰かがおやつを盗んだ！現場に残されたメモのインクから犯人を特定せよ」というミステリー設定からスタート。</p>
+      <p><strong>実験内容：</strong>コーヒーフィルターと水を使ってインクを分離。黒いペンでもメーカーによって「赤・青・黄」の混ざり方が違うことを利用して犯人のペンを特定する。</p>
+      <p><strong>費用：</strong>コーヒーフィルター＋水性ペン数本 ≒ ¥300以内</p>
+    </div>
+
+    <div class="merit-box">
+      <strong>YouTube的メリット：</strong>冒頭の「謎提示」が視聴維持率を高める最強のフック。ショート動画の予告編・解説アニメーションとも相性がよく、探偵キャラクターを出してシリーズとして認知させやすい。
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     シリーズ② 化学でお悩み解決
+══════════════════════════════════════════ -->
+<div class="series-card">
+  <div class="series-header long-header">
+    <span class="format-badge badge-long">LONG 月1本</span>
+    <span class="series-title">② 化学でお悩み解決</span>
+    <span class="series-tagline">生活の困りごとを化学が解決する</span>
+  </div>
+  <div class="series-body">
+
+    <div class="series-concept">
+      <strong>コンセプト：</strong>保護者が日常で感じる「困った！」を、化学の力で解決する。子どもが「化学って役に立つんだ」と実感でき、保護者層にも届きやすい設計。教育委員会・企業協賛との相性も良い。
+    </div>
+
+    <h3>企画例一覧</h3>
+    <table>
+      <tr>
+        <th>企画タイトル</th>
+        <th>解決する悩み</th>
+        <th>化学テーマ</th>
+        <th>予算目安</th>
+      </tr>
+      <tr>
+        <td>りんごが茶色くなるのを防ぎたい！</td>
+        <td>果物の酸化が気になる</td>
+        <td>酸化・抗酸化・ビタミンC</td>
+        <td>¥300</td>
+      </tr>
+      <tr>
+        <td>手についた油を落としたい！</td>
+        <td>手洗いで落ちない汚れ</td>
+        <td>界面活性剤・親水基・親油基</td>
+        <td>¥200</td>
+      </tr>
+      <tr>
+        <td>靴のにおいを消したい！</td>
+        <td>玄関の靴のにおい</td>
+        <td>重曹・中和反応・消臭の化学</td>
+        <td>¥100</td>
+      </tr>
+      <tr>
+        <td>服のシミをキレイに落としたい！</td>
+        <td>洗濯でも落ちないシミ</td>
+        <td>酸素系漂白・分解反応</td>
+        <td>¥300</td>
+      </tr>
+      <tr>
+        <td>水と油を混ぜたい！</td>
+        <td>ドレッシングがすぐ分離する</td>
+        <td>乳化・マヨネーズの科学</td>
+        <td>¥200</td>
+      </tr>
+    </table>
+
+    <div class="merit-box">
+      <strong>企業協賛との相性：</strong>「化学は生活に役立つ」というメッセージが明確で、洗剤・食品・日用品メーカーとのタイアップ企画に発展しやすいシリーズです。
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     シリーズ③ 化学クイズ番組
+══════════════════════════════════════════ -->
+<div class="series-card">
+  <div class="series-header long-header">
+    <span class="format-badge badge-long">LONG 月1本</span>
+    <span class="series-title">③ 化学クイズ番組</span>
+    <span class="series-tagline">視聴者参加型・3択で最後まで見させる</span>
+  </div>
+  <div class="series-body">
+
+    <div class="series-concept">
+      <strong>コンセプト：</strong>「答えを予想してから実験を見る」という参加型フォーマット。コメント欄が「正解だった！」「外れた！」で盛り上がり、エンゲージメントが自然に高まる。ショートとロング両方で展開できる汎用性の高いシリーズ。
+    </div>
+
+    <h3>企画例一覧</h3>
+    <table>
+      <tr>
+        <th>企画タイトル</th>
+        <th>選択肢（例）</th>
+        <th>正解となる化学現象</th>
+      </tr>
+      <tr>
+        <td>【3択クイズ】うがい薬の色を消すのはどれ？</td>
+        <td>水 / 砂糖水 / ビタミンC</td>
+        <td>ビタミンCによる還元反応</td>
+      </tr>
+      <tr>
+        <td>【3択クイズ】10円玉を一番きれいにするのは？</td>
+        <td>酢 / 牛乳 / 水</td>
+        <td>酢酸による酸化銅の溶解</td>
+      </tr>
+      <tr>
+        <td>【3択クイズ】りんごの変色を止めるのは？</td>
+        <td>レモン汁 / 塩水 / お茶</td>
+        <td>ビタミンCの抗酸化作用</td>
+      </tr>
+      <tr>
+        <td>【3択クイズ】一番泡が出る組み合わせは？</td>
+        <td>重曹＋酢 / 重曹＋牛乳 / 重曹＋水</td>
+        <td>炭酸ガスの発生反応</td>
+      </tr>
+      <tr>
+        <td>【3択クイズ】紫キャベツ液は何色に変わる？</td>
+        <td>酸性（赤）/ 中性（紫）/ アルカリ性（青）</td>
+        <td>アントシアニンのpH反応</td>
+      </tr>
+    </table>
+
+    <div class="merit-box">
+      <strong>ショートとの連携：</strong>ショートで「問題だけ出して正解は本編へ」という導線を作ると、ショート→ロングへの誘導フローが自然に生まれます。登録者獲得にも効果的です。
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     シリーズ④ 学校では教えない化学（SHORT）
+══════════════════════════════════════════ -->
+<div class="series-card">
+  <div class="series-header short-header">
+    <span class="format-badge badge-short">SHORT 月1本</span>
+    <span class="series-title">④ 学校では教えてくれない化学</span>
+    <span class="series-tagline">教科書に載っていない、でも面白すぎる化学の真実</span>
+  </div>
+  <div class="series-body">
+
+    <div class="series-concept">
+      <strong>コンセプト：</strong>「禁断感」と「大人も知らない」がフック。保護者も一緒に「え！？」となる内容で、SNSでシェアされやすい。AIイラスト・AI動画との相性が最高で、低コストで高品質な映像を制作できる。
+    </div>
+
+    <h3>企画アイデア一覧</h3>
+    <div class="short-ideas">
+      <div class="short-item">
+        <div class="short-num">01</div>
+        <div class="short-text">
+          「ダイヤモンドは燃える。世界一硬い物質が燃える理由」
+          <div class="thumb">サムネ：「世界一硬いのに燃えた」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">02</div>
+        <div class="short-text">
+          「水は本当は無色じゃない。青い理由を化学で証明」
+          <div class="thumb">サムネ：「水は青かった」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">03</div>
+        <div class="short-text">
+          「金は溶ける。溶かせる液体が存在する」
+          <div class="thumb">サムネ：「金が溶けた瞬間」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">04</div>
+        <div class="short-text">
+          「火は固体でも液体でもない。第4の状態の話」
+          <div class="thumb">サムネ：「火の正体、誰も知らない」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">05</div>
+        <div class="short-text">
+          「空気の78%は窒素だけど、人間はそれを全部捨てている」
+          <div class="thumb">サムネ：「吸った空気の78%は捨てている」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">06</div>
+        <div class="short-text">
+          「なんでガラスは透明なのに鉄は透明じゃないの？」
+          <div class="thumb">サムネ：「ガラスが透明な理由」</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="merit-box">
+      <strong>制作コスト：</strong>実験不要。AIイラスト＋ナレーションのみで完結。1本あたりの制作費はほぼゼロ。「サムネキャッチは4語以内」の法則で高CTRを狙う。
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     シリーズ⑤ 体の中の化学（SHORT）
+══════════════════════════════════════════ -->
+<div class="series-card">
+  <div class="series-header short-header">
+    <span class="format-badge badge-short">SHORT 月1本</span>
+    <span class="series-title">⑤ 体の中の化学</span>
+    <span class="series-tagline">自分の体が舞台。誰でも当事者になれる</span>
+  </div>
+  <div class="series-body">
+
+    <div class="series-concept">
+      <strong>コンセプト：</strong>実験キット不要。テーマが「自分の体」だから、どの視聴者も即座に当事者意識を持てる。AIイラスト・AI動画で分子レベルの映像を作ることで、他チャンネルが絶対に真似できないビジュアルを実現できる。
+    </div>
+
+    <h3>企画アイデア一覧</h3>
+    <div class="short-ideas">
+      <div class="short-item">
+        <div class="short-num">01</div>
+        <div class="short-text">
+          「体の中でごはんが消える瞬間をAIで見た!?」
+          <div class="thumb">サムネ：「消化の中身見えた」 ／ 消化酵素がデンプンを分解するシーンをAIアニメ化</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">02</div>
+        <div class="short-text">
+          「なんで運動すると筋肉痛になるの？乳酸の正体」
+          <div class="thumb">サムネ：「筋肉痛の犯人」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">03</div>
+        <div class="short-text">
+          「なんで緊張するとお腹が痛くなる？腸と脳の化学」
+          <div class="thumb">サムネ：「緊張と腸はつながってた」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">04</div>
+        <div class="short-text">
+          「涙と汗と鼻水の成分、ほぼ一緒だった」
+          <div class="thumb">サムネ：「涙と汗は同じだった」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">05</div>
+        <div class="short-text">
+          「なんでチョコを食べると幸せになる？脳内化学物質の話」
+          <div class="thumb">サムネ：「幸せの正体は化学だった」</div>
+        </div>
+      </div>
+      <div class="short-item">
+        <div class="short-num">06</div>
+        <div class="short-text">
+          「なんで傷は勝手に治る？体の修復化学」
+          <div class="thumb">サムネ：「傷が治る理由」</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="merit-box">
+      <strong>AI映像との相性：</strong>「分子レベルで体内を見せる」映像は、AI動画ツール（Runway / Kling）で制作可能。国内の子ども化学チャンネルでこのアプローチをしているチャンネルはほぼ存在せず、強い差別化になります。
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<footer>
+  子ども化学チャンネル コンテンツ企画提案書 2026年5月
+</footer>
+
+</body>
+</html>
