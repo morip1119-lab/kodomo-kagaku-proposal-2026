@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>議事録｜ScaleX打ち合わせ 2026-05-29</title>
+<style>
+  :root {
+    --ink: #111111;
+    --muted: #555555;
+    --line: #dddddd;
+    --bg: #ffffff;
+    --surface: #f8f8f8;
+    --accent: #2563EB;
+    --green: #166534;
+    --green-bg: #DCFCE7;
+    --yellow-bg: #FEF3C7;
+    --yellow-ink: #92400E;
+    --red-bg: #FEE2E2;
+    --red-ink: #991B1B;
+    --blue-bg: #DBEAFE;
+    --blue-ink: #1E40AF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    font-size: 11pt;
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 48px 64px;
+    line-height: 1.65;
+  }
+  h1 { font-size: 22pt; font-weight: 700; margin: 0 0 4px; }
+  h2 {
+    font-size: 14pt; font-weight: 700; margin: 36px 0 12px;
+    border-bottom: 2px solid var(--line); padding-bottom: 6px;
+  }
+  h3 { font-size: 12pt; font-weight: 700; margin: 20px 0 8px; }
+  p { margin: 4px 0 10px; }
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 2px solid #ccc; padding-bottom: 20px; margin-bottom: 24px;
+  }
+  .label { font-size: 9pt; font-weight: 700; letter-spacing: .08em; color: var(--accent); margin-bottom: 4px; }
+  .meta { text-align: right; font-size: 10pt; color: var(--muted); }
+  .meta strong { color: var(--ink); font-size: 11pt; }
+  .summary-box {
+    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+    border-radius: 6px; padding: 18px 20px; margin-bottom: 28px;
+  }
+  .summary-box ul { margin: 8px 0 0; padding-left: 1.2em; }
+  .summary-box li { margin-bottom: 6px; }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0;
+  }
+  .kpi-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
+  }
+  .kpi-card.highlight { background: var(--green-bg); border-color: #86EFAC; }
+  .kpi-value { font-size: 20pt; font-weight: 700; line-height: 1.2; }
+  .kpi-label { font-size: 9pt; color: var(--muted); margin-top: 4px; }
+  .flow {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0;
+  }
+  .flow-step {
+    background: var(--blue-bg); color: var(--blue-ink); font-size: 10pt; font-weight: 600;
+    padding: 10px 14px; border-radius: 6px; border: 1px solid #93C5FD;
+  }
+  .flow-arrow { color: var(--muted); font-weight: 700; }
+  .plan-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0;
+  }
+  .plan-card {
+    border: 1px solid var(--line); border-radius: 8px; padding: 16px; position: relative;
+  }
+  .plan-card.rank1 { border-color: #F59E0B; background: #FFFBEB; }
+  .plan-card.rank2 { border-color: #60A5FA; background: #EFF6FF; }
+  .plan-card.rank3 { border-color: #D1D5DB; background: #FAFAFA; opacity: .85; }
+  .rank-badge {
+    display: inline-block; font-size: 9pt; font-weight: 700; padding: 2px 10px;
+    border-radius: 12px; margin-bottom: 8px;
+  }
+  .rank1 .rank-badge { background: #F59E0B; color: #fff; }
+  .rank2 .rank-badge { background: var(--accent); color: #fff; }
+  .rank3 .rank-badge { background: #9CA3AF; color: #fff; }
+  .plan-title { font-weight: 700; font-size: 11pt; margin-bottom: 8px; }
+  .plan-card ul { margin: 0; padding-left: 1.1em; font-size: 10pt; }
+  .plan-card li { margin-bottom: 4px; }
+  .decision {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0;
+  }
+  .decision-card {
+    border-radius: 8px; padding: 16px 18px;
+  }
+  .decision-card.do { background: var(--green-bg); border: 1px solid #86EFAC; }
+  .decision-card.dont { background: var(--red-bg); border: 1px solid #FCA5A5; }
+  .decision-card h4 { margin: 0 0 8px; font-size: 11pt; }
+  .timeline {
+    position: relative; margin: 20px 0; padding-left: 24px;
+    border-left: 3px solid var(--accent);
+  }
+  .timeline-item { margin-bottom: 20px; position: relative; }
+  .timeline-item::before {
+    content: ""; position: absolute; left: -30px; top: 4px;
+    width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid #fff;
+  }
+  .timeline-date { font-weight: 700; font-size: 10pt; color: var(--accent); }
+  .timeline-body { font-size: 10pt; margin-top: 4px; }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 10pt; margin: 12px 0 20px;
+  }
+  th { background: #f0f0f0; border: 1px solid #ccc; padding: 8px 10px; text-align: left; font-weight: 700; }
+  td { border: 1px solid #ccc; padding: 8px 10px; vertical-align: top; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .badge {
+    display: inline-block; font-size: 9pt; font-weight: 700; padding: 2px 9px;
+    border-radius: 12px; white-space: nowrap;
+  }
+  .badge-green { background: var(--green-bg); color: var(--green); }
+  .badge-yellow { background: var(--yellow-bg); color: var(--yellow-ink); }
+  .badge-blue { background: var(--blue-bg); color: var(--blue-ink); }
+  .badge-red { background: var(--red-bg); color: var(--red-ink); }
+  .diagram-box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 20px; margin: 16px 0; overflow-x: auto;
+  }
+  .diagram-row {
+    display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; justify-content: center;
+  }
+  .diagram-node {
+    flex: 1; min-width: 140px; max-width: 200px; text-align: center;
+    padding: 14px 10px; border-radius: 8px; font-size: 10pt; font-weight: 600;
+  }
+  .node-long { background: var(--blue-bg); border: 2px solid #60A5FA; color: var(--blue-ink); }
+  .node-short { background: var(--yellow-bg); border: 2px solid #FCD34D; color: var(--yellow-ink); }
+  .node-clip { background: var(--green-bg); border: 2px solid #86EFAC; color: var(--green); }
+  .node-museum { background: #F3E8FF; border: 2px solid #C4B5FD; color: #5B21B6; }
+  .connector { display: flex; align-items: center; color: var(--muted); font-size: 18pt; font-weight: 700; }
+  .todo-table td:first-child { width: 28%; font-weight: 600; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 9pt; color: var(--muted); }
+  @media print {
+    body { padding: 24px; max-width: 100%; }
+    .plan-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="label">MEETING MINUTES</div>
+    <h1>ScaleX 打ち合わせ 議事録</h1>
+    <p style="margin:0;color:var(--muted);font-size:10pt;">子ども化学チャンネル｜企画方向性・撮影スケジュール</p>
+  </div>
+  <div class="meta">
+    <strong>2026年5月29日（木）</strong><br>
+    Microsoft Teams<br>
+    記録元：文字起こし
+  </div>
+</div>
+
+<div class="summary-box">
+  <strong>エグゼクティブサマリー</strong>
+  <ul>
+    <li>直近90日は再生約<strong>1.6万</strong>・登録者<strong>+100人</strong>。伸びの核は<strong>元気生成コラボ</strong>（継続再生中）。</li>
+    <li>ロング動画は<strong>エンタメ・ストーリー性</strong>を強化。最有力は<strong>「科学謎解き」</strong>（事件→容疑者→実験検証→犯人判明）。</li>
+    <li>6月分ストックあり → <strong>新方向性は7月撮影から</strong>。6/10サブステージ企画は一旦見送り・持ち帰り。</li>
+    <li>ショートは<strong>専用ネタよりロング切り抜き優先</strong>（ロング伸長が目的のため）。</li>
+    <li>撮影は<strong>3ヶ月分をまとめて</strong>。次回は6月中旬まで（6/19出張前）が理想。ラフスケジュールをExcelで事前共有。</li>
+  </ul>
+</div>
+
+<h2>1. 参加者・目的</h2>
+<table>
+  <tr><th>項目</th><th>内容</th></tr>
+  <tr><td>会議名</td><td>ScaleX打ち合わせ（子ども化学チャンネル）</td></tr>
+  <tr><td>日時</td><td>2026年5月29日</td></tr>
+  <tr><td>形式</td><td>Microsoft Teams</td></tr>
+  <tr><td>目的</td><td>直近アナリティクス共有／ロング・ショートの企画方向性提案／撮影・投稿スケジュール調整</td></tr>
+</table>
+
+<h2>2. 直近90日アナリティクス</h2>
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-value">約1.6万</div>
+    <div class="kpi-label">再生数（90日）</div>
+  </div>
+  <div class="kpi-card highlight">
+    <div class="kpi-value">+100</div>
+    <div class="kpi-label">登録者増</div>
+  </div>
+  <div class="kpi-card highlight">
+    <div class="kpi-value">元気生成</div>
+    <div class="kpi-label">コラボが登録増の主因・継続再生</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">〜6万</div>
+    <div class="kpi-label">CTR参考（大きく伸びた動画）</div>
+  </div>
+</div>
+<p><strong>CTRの目安（共有）：</strong>公開直後は<strong>8〜10%</strong>が相場。半年〜1年経つと<strong>5%以下</strong>に落ち着く。再生が大きくなるほどCTRは安定して低下する傾向。</p>
+
+<h2>3. ロング動画｜企画方向性（図解）</h2>
+<p>全体方針：<strong>ストーリー・エンタメ要素</strong>を強め、見せ方を刷新。ロング3案＋ショート2案を提示（本日はロング中心で合意形成）。</p>
+
+<div class="plan-grid">
+  <div class="plan-card rank1">
+    <span class="rank-badge">最有力 ★</span>
+    <div class="plan-title">① 科学謎解きシリーズ</div>
+    <ul>
+      <li>事件発生 → 容疑者3人 → 実験で検証 → 犯人判明</li>
+      <li>例：熱を当てると文字が見える／暗くすると見える 等</li>
+      <li>仮面研的な多様な切り口も可</li>
+      <li><strong>双方とも最優先で挑戦したい</strong></li>
+    </ul>
+  </div>
+  <div class="plan-card rank2">
+    <span class="rank-badge">挑戦候補</span>
+    <div class="plan-title">② 科学でお悩み解決</div>
+    <ul>
+      <li>身近な困りごとを科学で解決</li>
+      <li>例：リンゴの変色防止、靴の臭い、暑さ対策、蚊対策</li>
+      <li>視聴者の「あるある」に引き寄せやすい</li>
+    </ul>
+  </div>
+  <div class="plan-card rank3">
+    <span class="rank-badge">優先度低</span>
+    <div class="plan-title">③ 科学クイズ番組型</div>
+    <ul>
+      <li>10円玉をきれいにする調味料クイズ等</li>
+      <li>過去に同形式で大きくハマった実績なし</li>
+      <li>参考案として提示、主軸にはしない</li>
+    </ul>
+  </div>
+</div>
+
+<div class="flow">
+  <span class="flow-step">事件・現象発生</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">容疑者3候補</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">科学実験で検証</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">犯人（原因）判明</span>
+</div>
+
+<h3>チャンネル前提（合意事項）</h3>
+<ul>
+  <li>子どもが<strong>家で安全にできる</strong>身近な素材の実験がコンセプト（危険物・入手困難なものは避ける）。</li>
+  <li>ネタの被りは許容。<strong>見せ方・切り口（謎解き化）</strong>で新規視聴者にもリーチ可能。</li>
+  <li>「毎回完全新規ネタ」は難しい → <strong>シリーズ化・フォーマット化</strong>で対応。</li>
+  <li>方向性は<strong>部内で意見集約後に確定</strong>（本日時点では持ち帰り）。個人的には<strong>①謎解きが最有力</strong>。</li>
+</ul>
+
+<h2>4. ショート動画｜方針（図解）</h2>
+<div class="diagram-box">
+  <div class="diagram-row">
+    <div class="diagram-node node-long">ロング新企画<br><small>謎解き／お悩み解決</small></div>
+    <div class="connector">→</div>
+    <div class="diagram-node node-clip">切り抜きショート<br><strong>優先</strong></div>
+    <div class="connector">｜</div>
+    <div class="diagram-node node-short">ショート専用ネタ<br><small>学校で教えない科学等</small></div>
+  </div>
+  <p style="text-align:center;font-size:10pt;margin:12px 0 0;color:var(--muted);">
+    目的＝ロングを伸ばす → <strong>切り抜きショートが有効</strong>（専用企画より優先）
+  </p>
+</div>
+<ul>
+  <li>これまでショートはロングの切り抜き中心。専用ネタ案（学校で教えてくれない科学等）もあるが、<strong>ロング回転のための切り出しを優先</strong>との方向性。</li>
+  <li><strong>日課チャンネル</strong>とは住み分け（日課＝別コンセプト、本チャンネルは実験動画特化）。</li>
+  <li>9月からのショートは比較的視聴されているため、ショート継続自体は有効。</li>
+  <li>国立科学博物館案件とは軸を分ける：博物館＝検査シリーズ／身近トリビア、本チャンネル＝<strong>実験中心</strong>でも差別化は限定的だが、テーマ選びで調整可能。</li>
+</ul>
+
+<h2>5. スケジュール・撮影</h2>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-date">〜6月</div>
+    <div class="timeline-body">6月分ストックあり。<strong>新方向性の撮影は7月から</strong>。6/10サブステージ向け特定企画は見送り・持ち帰り。</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-date">6月中旬まで</div>
+    <div class="timeline-body"><strong>撮影希望</strong>（6/19〜出張のため）。6/10以降、<strong>6/15以外</strong>は調整可（16・17・18日候補）。構成案は部内合意後に作成（時間要）。</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-date">6/19〜</div>
+    <div class="timeline-body">出張（企業化研修・スタッフ参加）。約1週間は連絡困難。6月末帰国。</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-date">7月第1週</div>
+    <div class="timeline-body">最悪ケースの撮影候補。7月から新企画で次回撮影。</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-date">撮影ペース</div>
+    <div class="timeline-body"><strong>1回の撮影で約3ヶ月分</strong>を確保。例：7月下旬〜8月初旬に移行分 → 9〜11月分 → 12月以降分。</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-date">8月（夏休み）</div>
+    <div class="timeline-body">日本側の投稿が難しい時期。<strong>ロング2本・ショート2本</strong>（年間予算で夏冬のみ月2本ずつ使用）。</div>
+  </div>
+</div>
+
+<table>
+  <tr><th>項目</th><th>決定・合意</th></tr>
+  <tr><td>5月ショート未投稿分</td><td><span class="badge badge-yellow">6月に繰越OK</span></td></tr>
+  <tr><td>次回撮影本数</td><td>移行分含め<strong>ロング3本分</strong>想定（Excelベースで確認）</td></tr>
+  <tr><td>スケジュール共有</td><td>Excelで<strong>ラフスケジュールを事前共有</strong>（直前納品を避ける）</td></tr>
+  <tr><td>次回打合せ</td><td>部内意見集約後・月曜会議等で継続調整</td></tr>
+</table>
+
+<h2>6. 決定事項・方向性まとめ</h2>
+<div class="decision">
+  <div class="decision-card do">
+    <h4>✓ 進めること</h4>
+    <ul style="margin:0;padding-left:1.2em;font-size:10pt;">
+      <li>ロング：<strong>謎解き</strong>を第一候補に企画化（②お悩み解決も並行検討）</li>
+      <li>ショート：<strong>ロング切り抜き優先</strong></li>
+      <li>7月から新フォーマットで撮影開始</li>
+      <li>3ヶ月分まとめ撮り＋Excel事前共有</li>
+      <li>被りネタは見せ方変更でOK</li>
+    </ul>
+  </div>
+  <div class="decision-card dont">
+    <h4>△ 見送り・保留</h4>
+    <ul style="margin:0;padding-left:1.2em;font-size:10pt;">
+      <li>6/10サブステージ向け新企画（ストック・方向転換のため）</li>
+      <li>科学クイズ形式を主軸にする案（優先度低）</li>
+      <li>ショート専用ネタの新規量産（切り抜き優先）</li>
+      <li>本日時点での方向性確定（部内持ち帰り）</li>
+    </ul>
+  </div>
+</div>
+
+<h2>7. アクションアイテム</h2>
+<table class="todo-table">
+  <tr><th>担当</th><th>内容</th><th>期限目安</th></tr>
+  <tr>
+    <td>クライアント側</td>
+    <td>ロング企画方向性（謎解き中心）の<strong>部内意見集約・確定</strong></td>
+    <td>次回打合せまで</td>
+  </tr>
+  <tr>
+    <td>ScaleX</td>
+    <td>方向性確定後、<strong>構成案・企画案</strong>作成・事前チェック依頼</td>
+    <td>できるだけ早く</td>
+  </tr>
+  <tr>
+    <td>双方</td>
+    <td>撮影日程調整（<strong>6/10以降・6/15除く</strong>、理想は6月中旬まで）</td>
+    <td>6月上旬</td>
+  </tr>
+  <tr>
+    <td>双方</td>
+    <td><strong>Excelラフスケジュール</strong>共有・月次打合せ継続</td>
+    <td>随時</td>
+  </tr>
+  <tr>
+    <td>クライアント側</td>
+    <td>5月未投稿ショート → <strong>6月投稿</strong>で調整</td>
+    <td>6月</td>
+  </tr>
+  <tr>
+    <td>ScaleX</td>
+    <td>本議事録・資料の<strong>送付</strong></td>
+    <td>会議後</td>
+  </tr>
+</table>
+
+<h2>8. 補足・論点メモ</h2>
+<ul style="font-size:10pt;">
+  <li>国立科学博物館連携：大きく「検査シリーズ」と「身近なヘッド科学トリビア」の2軸。本チャンネルは実験軸だが、テーマの重なりは一定程度あり。</li>
+  <li>他チャンネル（三日チャネル等）との住み分け：実験よりの切り口 vs 身近科学の説明型など、テーマ選定で差別化検討。</li>
+  <li>出張はリーダーシップ研修プログラム（山岳）。貴重な体験だが、6/19前後は連絡に制約。</li>
+</ul>
+
+<div class="footer">
+  作成：YouTube AI Operator ／ 元データ：ScaleX打ち合わせ _ Microsoft Teams 2026-05-29 10-04-00_1.txt<br>
+  ※話者名は文字起こしに含まれないため省略。数値・日程は発言ベース。確定事項は部内合意後に更新してください。
+</div>
+
+</body>
+</html>
