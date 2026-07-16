@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>定例MTG資料｜中井耀香チャンネル｜2026-05-19〜07-15 初回分析</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #5c5c5c;
+    --line: #e2e2e2;
+    --bg: #faf9f7;
+    --card: #ffffff;
+    --accent: #8b4513;
+    --accent-soft: #f5ebe0;
+    --green: #166534;
+    --green-bg: #ecfdf5;
+    --amber: #92400e;
+    --amber-bg: #fffbeb;
+    --red: #991b1b;
+    --red-bg: #fef2f2;
+    --blue: #1e3a5f;
+    --blue-bg: #eff6ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 14px;
+  }
+  .page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+  .cover {
+    background: linear-gradient(145deg, #2c1810 0%, #5c3317 45%, #8b4513 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px 36px;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .cover-label {
+    font-size: 11px; letter-spacing: 0.14em; font-weight: 700;
+    opacity: 0.75; margin-bottom: 10px;
+  }
+  .cover h1 { font-size: 28px; font-weight: 700; line-height: 1.35; margin-bottom: 12px; }
+  .cover p { opacity: 0.9; font-size: 14px; max-width: 640px; }
+  .cover-meta {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px;
+  }
+  .chip {
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px; font-weight: 600;
+  }
+  h2 {
+    font-size: 20px; font-weight: 700;
+    margin: 40px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+  }
+  h3 { font-size: 15px; font-weight: 700; margin: 22px 0 10px; color: var(--blue); }
+  p { margin-bottom: 10px; color: var(--ink); }
+  .muted { color: var(--muted); font-size: 13px; }
+  .summary {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--accent);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 28px;
+  }
+  .summary ul { padding-left: 1.2em; }
+  .summary li { margin-bottom: 8px; }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 16px 0 8px;
+  }
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .kpi.warn { background: var(--amber-bg); border-color: #fcd34d; }
+  .kpi.good { background: var(--green-bg); border-color: #86efac; }
+  .kpi.bad { background: var(--red-bg); border-color: #fca5a5; }
+  .kpi-val { font-size: 26px; font-weight: 800; line-height: 1.15; }
+  .kpi-lab { font-size: 11px; color: var(--muted); margin-top: 6px; font-weight: 600; letter-spacing: 0.04em; }
+  .kpi-note { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 14px 0;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 10px 0 6px;
+  }
+  th {
+    background: #f3eee8; text-align: left; padding: 9px 10px;
+    border: 1px solid #ddd; font-weight: 700; color: var(--accent);
+  }
+  td { border: 1px solid #ddd; padding: 8px 10px; vertical-align: top; }
+  tr:nth-child(even) td { background: #fcfaf8; }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  .b-green { background: var(--green-bg); color: var(--green); }
+  .b-amber { background: var(--amber-bg); color: var(--amber); }
+  .b-red { background: var(--red-bg); color: var(--red); }
+  .b-blue { background: var(--blue-bg); color: var(--blue); }
+  .b-accent { background: var(--accent-soft); color: var(--accent); }
+
+  /* charts */
+  .chart-wrap { margin: 12px 0; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 160px; padding: 8px 0 0; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+  .bar {
+    width: 100%; border-radius: 3px 3px 0 0; min-height: 2px;
+    background: #c4a484;
+    transition: height 0.3s;
+  }
+  .bar.spike { background: var(--accent); }
+  .bar.dry { background: #d4d4d4; }
+  .bar-label { font-size: 8px; color: var(--muted); margin-top: 4px; writing-mode: vertical-rl; height: 0; overflow: visible; }
+
+  .month-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 12px; }
+  .month-card {
+    border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--card);
+  }
+  .month-card h4 { font-size: 13px; margin-bottom: 8px; }
+  .meter {
+    height: 12px; background: #eee; border-radius: 999px; overflow: hidden; margin: 8px 0;
+  }
+  .meter > span { display: block; height: 100%; border-radius: 999px; }
+  .meter-target { background: #ddd; position: relative; }
+  .meter-actual { background: var(--accent); }
+
+  /* airplane diagram */
+  .plane {
+    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 8px; align-items: stretch;
+    margin: 18px 0;
+  }
+  .plane-step {
+    border-radius: 12px; padding: 16px 14px; text-align: center; font-size: 12.5px;
+    border: 2px solid;
+  }
+  .plane-step strong { display: block; font-size: 13px; margin-bottom: 6px; }
+  .p1 { background: var(--red-bg); border-color: #fca5a5; color: var(--red); }
+  .p2 { background: var(--amber-bg); border-color: #fcd34d; color: var(--amber); }
+  .p3 { background: var(--green-bg); border-color: #86efac; color: var(--green); }
+  .plane-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800; color: var(--muted);
+  }
+
+  .axis-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 14px 0;
+  }
+  .axis {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px;
+  }
+  .axis h4 { font-size: 13px; color: var(--accent); margin-bottom: 8px; }
+  .axis .score { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+
+  .proposal {
+    border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px;
+    background: var(--card); margin-bottom: 12px;
+  }
+  .proposal.priority {
+    border-color: #d4a373; background: #fffaf5;
+    box-shadow: 0 0 0 1px rgba(139,69,19,0.08);
+  }
+  .proposal-head {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+    margin-bottom: 8px;
+  }
+  .proposal-title { font-weight: 700; font-size: 14px; }
+  .thumb {
+    display: inline-block; background: #1a1a1a; color: #fff;
+    font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .decision {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0;
+  }
+  .do, .ask {
+    border-radius: 12px; padding: 18px;
+  }
+  .do { background: var(--green-bg); border: 1px solid #86efac; }
+  .ask { background: var(--blue-bg); border: 1px solid #93c5fd; }
+  .do h4, .ask h4 { margin-bottom: 8px; font-size: 14px; }
+  .do ul, .ask ul { padding-left: 1.15em; font-size: 13px; }
+  .do li, .ask li { margin-bottom: 6px; }
+
+  .footer {
+    margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
+    font-size: 11px; color: var(--muted);
+  }
+  .toc {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px;
+  }
+  .toc a {
+    text-decoration: none; color: var(--accent); font-size: 12px; font-weight: 600;
+    background: var(--accent-soft); padding: 6px 12px; border-radius: 999px;
+  }
+  @media (max-width: 800px) {
+    .kpi-grid, .grid-2, .grid-3, .axis-grid, .decision, .month-bars, .plane {
+      grid-template-columns: 1fr;
+    }
+    .plane { display: flex; flex-direction: column; }
+    .page { padding: 24px 16px 60px; }
+    .cover h1 { font-size: 22px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .page { max-width: 100%; padding: 12px; }
+    .cover { break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <section class="cover">
+    <div class="cover-label">CLIENT REGULAR MEETING ／ FIRST REVIEW</div>
+    <h1>中井耀香チャンネル<br>定例MTG資料｜契約開始〜初回分析</h1>
+    <p>分析期間：2026年5月19日（投稿スタート）〜 2026年7月15日／契約後、初の定例MTG</p>
+    <p style="margin-top:8px;opacity:0.95;">
+      対象チャンネル：
+      <a href="https://www.youtube.com/@nakaiyouka" target="_blank" rel="noopener" style="color:#fff;font-weight:700;text-decoration:underline;">
+        中井耀香チャンネル〜運の源とつながる〜（@nakaiyouka）
+      </a>
+    </p>
+    <div class="cover-meta">
+      <span class="chip">再生 83,082回</span>
+      <span class="chip">純増登録 +41人</span>
+      <span class="chip">CTR 6.76%</span>
+      <span class="chip">推定収益 ¥37,318</span>
+    </div>
+  </section>
+
+  <nav class="toc">
+    <a href="#s1">1. 結論</a>
+    <a href="#s2">2. KPI</a>
+    <a href="#s3">3. 再生推移</a>
+    <a href="#s4">4. 投稿本数</a>
+    <a href="#s5">5. 登録者診断</a>
+    <a href="#s6">6. ヒット分析</a>
+    <a href="#s7">7. 視聴者層</a>
+    <a href="#s8">8. 提案</a>
+    <a href="#s9">9. 合意事項</a>
+  </nav>
+
+  <!-- 1. SUMMARY -->
+  <h2 id="s1">1. 本日の結論（先に共有）</h2>
+  <div class="summary">
+    <ul>
+      <li><strong>登録者減少の主因は「投稿本数不足」</strong>です。企画力そのものより、<strong>離陸に必要な推力（ヒット×本数）が足りていない</strong>状態です。</li>
+      <li>契約前から登録者減少トレンドにあったチャンネルに対し、5/19以降は<strong>ヒットの芽は出ている</strong>（破壊数・開運日・LIVE・NGシリーズ）。ただし<strong>本数が月10本前後（7月前半はほぼ停止）</strong>のため、勢いが維持できていません。</li>
+      <li><strong>月15本への復帰を強く推奨</strong>します。同時に「鉄板の日付運勢」と「過去ヒット（NG・神道・数秘）」の再構成を主軸に据えます。</li>
+      <li>評価軸は常に<strong>①再生率 ②視聴者維持率 ③トラフィックソース</strong>の3軸。現状の維持率（45〜64歳で約36〜38%）は目標圏内。次の課題は<strong>ブラウジング比率の拡大</strong>と<strong>登録転換を生むヒット本数</strong>です。</li>
+    </ul>
+  </div>
+
+  <!-- 2. KPI -->
+  <h2 id="s2">2. 期間KPIサマリー（5/19〜7/15・57日間）</h2>
+  <div class="kpi-grid">
+    <div class="kpi good">
+      <div class="kpi-val">83,082</div>
+      <div class="kpi-lab">総視聴回数</div>
+      <div class="kpi-note">日平均 約1,458回</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-val">+41</div>
+      <div class="kpi-lab">チャンネル登録者（純増）</div>
+      <div class="kpi-note">成長にはまだ弱い</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-val">6.76%</div>
+      <div class="kpi-lab">インプレッションCTR</div>
+      <div class="kpi-note">健全水準（目安5〜8%）</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">¥37,318</div>
+      <div class="kpi-lab">推定収益（JPY）</div>
+      <div class="kpi-note">LIVEが収益の柱</div>
+    </div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-val">12,462h</div>
+      <div class="kpi-lab">総再生時間</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">70.7万</div>
+      <div class="kpi-lab">インプレッション</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-val">約15本</div>
+      <div class="kpi-lab">期間中の公開本数</div>
+      <div class="kpi-note">目標換算：月15本＝約29本相当</div>
+    </div>
+    <div class="kpi bad">
+      <div class="kpi-val">1本</div>
+      <div class="kpi-lab">7/1〜7/15の公開</div>
+      <div class="kpi-note">再生が急減した直接要因</div>
+    </div>
+  </div>
+  <p class="muted">※「テストウェビナー」は分析対象外。公開本数は実質コンテンツ15本で集計。総視聴・登録・収益はYouTube「合計」行の公式値。</p>
+
+  <!-- 3. DAILY CHART -->
+  <h2 id="s3">3. 日次再生推移｜ヒット日と「空白」が一目で分かる</h2>
+  <div class="card">
+    <p><strong>読み方：</strong>茶色の高い棒＝ヒット公開日。灰色寄り＝投稿が薄い日。7月上旬以降の平坦化が、本数不足の影響を示しています。</p>
+    <div class="chart-wrap">
+      <div class="bar-chart" id="dailyChart" aria-label="日次再生数グラフ"></div>
+    </div>
+    <div class="grid-3" style="margin-top:16px;">
+      <div>
+        <span class="badge b-accent">ピーク①</span>
+        <p style="margin-top:6px;font-size:13px;"><strong>5/31</strong> 6,063回<br>破壊数＋6月運勢LIVE</p>
+      </div>
+      <div>
+        <span class="badge b-accent">ピーク②</span>
+        <p style="margin-top:6px;font-size:13px;"><strong>6/15</strong> 5,979回<br>6月後半運勢LIVE</p>
+      </div>
+      <div>
+        <span class="badge b-red">警告</span>
+        <p style="margin-top:6px;font-size:13px;"><strong>7/3以降</strong> 300〜700回台<br>投稿ほぼ停止＝減速</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. VOLUME -->
+  <h2 id="s4">4. 投稿本数｜目標「月15本」対 実績「月10本前後」</h2>
+  <div class="month-bars">
+    <div class="month-card">
+      <h4>5月（19〜31日・13日間）</h4>
+      <div class="kpi-val" style="font-size:22px;">5本</div>
+      <p class="muted">ペース換算 ≈ 月11〜12本</p>
+      <div class="meter"><span class="meter-actual" style="width:73%;"></span></div>
+      <p class="muted">目標15に対し約73%ペース</p>
+    </div>
+    <div class="month-card">
+      <h4>6月（フル月）</h4>
+      <div class="kpi-val" style="font-size:22px;">約9〜10本</div>
+      <p class="muted">実質コンテンツ（発表含む）</p>
+      <div class="meter"><span class="meter-actual" style="width:67%;"></span></div>
+      <p class="muted">目標15に対し約67%</p>
+    </div>
+    <div class="month-card" style="background:var(--red-bg);border-color:#fca5a5;">
+      <h4>7月（1〜15日）</h4>
+      <div class="kpi-val" style="font-size:22px;color:var(--red);">1本</div>
+      <p class="muted">半月で1本＝月2本ペース</p>
+      <div class="meter"><span class="meter-actual" style="width:13%;background:#ef4444;"></span></div>
+      <p class="muted">目標から大きく乖離</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;">
+    <h3 style="margin-top:0;">なぜ本数が重要か（YouTubeの仕組み）</h3>
+    <div class="grid-2">
+      <div>
+        <p><strong>アルゴリズムは「新鮮なシグナル」を好む</strong></p>
+        <p class="muted">投稿間隔が空くと、おすすめ枠（ブラウジング）への露出機会が減り、既存視聴者の習慣も途切れます。</p>
+      </div>
+      <div>
+        <p><strong>ヒットは「確率のゲーム」</strong></p>
+        <p class="muted">月10本より月15本の方が、鉄板企画・日付企画・再構成ヒットを試せる回数が1.5倍。離陸には試行回数が必要です。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SUBSCRIBER DIAGNOSIS -->
+  <h2 id="s5">5. 登録者診断｜「飛行機の離陸」と同じ理屈</h2>
+  <div class="card">
+    <p>契約開始時点で、すでに<strong>登録者減少トレンド</strong>に入っていたチャンネルです。減少を止め、再び上昇に転じるには、滑走路での巡航速度ではなく、<strong>離陸推力（ヒット本数×投稿頻度）</strong>が必要です。</p>
+    <div class="plane">
+      <div class="plane-step p1">
+        <strong>① 滑走路（現状）</strong>
+        登録者減少中からスタート<br>
+        本数不足で推力不足<br>
+        期間純増はわずか +41
+      </div>
+      <div class="plane-arrow">→</div>
+      <div class="plane-step p2">
+        <strong>② 離陸（これから）</strong>
+        ヒット企画を連続投入<br>
+        月15本で推力を確保<br>
+        破壊数・開運日・NG再構成
+      </div>
+      <div class="plane-arrow">→</div>
+      <div class="plane-step p3">
+        <strong>③ 巡航（目標）</strong>
+        再生率50%以上で成長<br>
+        ブラウジングが主流入<br>
+        登録者が自然増へ転換
+      </div>
+    </div>
+    <table>
+      <tr>
+        <th>勢いの目安（再生率）</th>
+        <th>判定</th>
+        <th>本チャンネルへの含意</th>
+      </tr>
+      <tr>
+        <td>70%以上</td>
+        <td><span class="badge b-green">絶好調</span></td>
+        <td>まだこのゾーンではない</td>
+      </tr>
+      <tr>
+        <td>50%以上</td>
+        <td><span class="badge b-blue">成長中</span></td>
+        <td>短期目標ゾーン</td>
+      </tr>
+      <tr>
+        <td>30%前後</td>
+        <td><span class="badge b-amber">横ばい</span></td>
+        <td>本数が戻らないとここへ留まる</td>
+      </tr>
+      <tr>
+        <td>30%未満／10%以下</td>
+        <td><span class="badge b-red">成長困難〜危険</span></td>
+        <td>投稿空白が続くと危険側へ</td>
+      </tr>
+    </table>
+    <p class="muted">※再生率＝期間再生数÷登録者数。登録者純増+41は「コンテンツ経由の獲得はあるが、チャンネル全体の勢いとしては離陸前」と読む。</p>
+  </div>
+
+  <!-- 6. HIT ANALYSIS -->
+  <h2 id="s6">6. 何が当たったか｜期間ヒットと再現すべき型</h2>
+  <div class="axis-grid">
+    <div class="axis">
+      <h4>① 再生・登録転換</h4>
+      <div class="score" style="color:var(--green);">良好な芽</div>
+      <p class="muted">破壊数 +74登録／開運日 +46／LIVE系 +25〜31。ヒット型は明確。</p>
+    </div>
+    <div class="axis">
+      <h4>② 視聴者維持率</h4>
+      <div class="score" style="color:var(--green);">36〜38%</div>
+      <p class="muted">エンタメ系目標35%以上をクリア。45〜64歳が強い。</p>
+    </div>
+    <div class="axis">
+      <h4>③ CTR（サムネ）</h4>
+      <div class="score" style="color:var(--green);">6.8%</div>
+      <p class="muted">全体健全。破壊数8.51%・産土様7.95%は優秀。</p>
+    </div>
+  </div>
+
+  <h3>期間中の公開コンテンツ TOP（視聴回数）</h3>
+  <table>
+    <tr>
+      <th>#</th><th>公開日</th><th>タイトル（要約）</th><th>再生</th><th>登録</th><th>CTR</th><th>型</th>
+    </tr>
+    <tr>
+      <td>1</td><td>5/30</td><td>破壊数｜電話番号・住所・暗証番号</td><td><strong>9,067</strong></td><td><strong>+74</strong></td><td>8.51%</td>
+      <td><span class="badge b-accent">数秘×参加型</span></td>
+    </tr>
+    <tr>
+      <td>2</td><td>5/31</td><td>【特別LIVE】6月の運勢解説</td><td>8,000</td><td>+25</td><td>7.24%</td>
+      <td><span class="badge b-blue">日付×LIVE</span></td>
+    </tr>
+    <tr>
+      <td>3</td><td>6/15</td><td>【緊急LIVE】6月後半の運勢</td><td>7,124</td><td>+31</td><td>7.40%</td>
+      <td><span class="badge b-blue">日付×LIVE</span></td>
+    </tr>
+    <tr>
+      <td>4</td><td>5/19</td><td>5/20・29 最強開運日の過ごし方</td><td>4,918</td><td>+46</td><td>6.61%</td>
+      <td><span class="badge b-blue">鉄板日付</span></td>
+    </tr>
+    <tr>
+      <td>5</td><td>5/22</td><td>産土様の見つけ方と参拝ルール</td><td>3,372</td><td>+7</td><td>7.95%</td>
+      <td><span class="badge b-green">神道専門</span></td>
+    </tr>
+    <tr>
+      <td>6</td><td>6/15</td><td>重大発表</td><td>3,304</td><td>+5</td><td>8.14%</td>
+      <td><span class="badge b-amber">告知</span></td>
+    </tr>
+    <tr>
+      <td>7</td><td>6/6</td><td>お金を使っていい日・控える日</td><td>3,160</td><td>+7</td><td>7.92%</td>
+      <td><span class="badge b-blue">日付×金運</span></td>
+    </tr>
+    <tr>
+      <td>8</td><td>6/28</td><td>キッチンに置くと絶対NGなもの5選</td><td>2,786</td><td>+6</td><td>6.41%</td>
+      <td><span class="badge b-accent">NG再構成</span></td>
+    </tr>
+  </table>
+
+  <h3>ボウフラ分析（当たる企画の感情パターン）</h3>
+  <div class="grid-2">
+    <div class="card">
+      <p><strong>機能している型</strong></p>
+      <ul style="padding-left:1.2em;">
+        <li><strong>生死感動</strong>：破壊数・NGシリーズ（「運気が大凶に」）</li>
+        <li><strong>願望感動</strong>：開運日の過ごし方・金運の日</li>
+        <li><strong>静的感動</strong>：産土様・神社・LIVE運勢</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p><strong>カタログでも伸び続ける過去ヒット</strong></p>
+      <ul style="padding-left:1.2em;">
+        <li>玄関NG（期間中も1,324回）</li>
+        <li>トイレNG／リビングNG／寝室NG</li>
+        <li>→ <strong>2026年版の再撮影・再構成が最優先</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7. AUDIENCE -->
+  <h2 id="s7">7. 視聴者層｜誰に当てにいくか（ブレない設計）</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="margin-top:0;">性別</h3>
+      <div style="display:flex;height:28px;border-radius:8px;overflow:hidden;margin:12px 0;">
+        <div style="width:76.79%;background:#8b4513;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;">女性 76.8%</div>
+        <div style="width:23.21%;background:#c4a484;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;">男性 23.2%</div>
+      </div>
+      <p class="muted">平均視聴：女性 6:50／維持率 36.2%　男性 4:59／33.7%</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;">年齢（コア）</h3>
+      <table>
+        <tr><th>年代</th><th>視聴比率</th><th>維持率</th></tr>
+        <tr><td><strong>55〜64歳</strong></td><td><strong>48.3%</strong></td><td>38.0%</td></tr>
+        <tr><td>45〜54歳</td><td>31.2%</td><td>37.3%</td></tr>
+        <tr><td>65歳以上</td><td>14.8%</td><td>36.6%</td></tr>
+        <tr><td>35〜44歳</td><td>5.2%</td><td>33.1%</td></tr>
+      </table>
+      <p class="muted">コア＝<strong>45〜64歳女性（約79%）</strong>。サムネ文字は4語以内・説明はタイトルへ。</p>
+    </div>
+  </div>
+
+  <!-- 8. PROPOSALS -->
+  <h2 id="s8">8. 提案｜月15本復帰 × 鉄板ヒットの再投入</h2>
+
+  <div class="decision">
+    <div class="do">
+      <h4>推奨：月15本へ戻す</h4>
+      <ul>
+        <li>成長局面の最低ラインは<strong>週3回以上</strong>。月15本＝隔日ペースで妥当。</li>
+        <li>本数を増やしつつ、<strong>ヒット確率の高い型に寄せる</strong>（量×質）。</li>
+        <li>撮影はまとめ撮り→編集バッファ確保で「空白週」をゼロに。</li>
+      </ul>
+    </div>
+    <div class="ask">
+      <h4>クライアントへの確認事項</h4>
+      <ul>
+        <li>月15本の<strong>制作・出演キャパ</strong>は確保できるか？</li>
+        <li>LIVE運勢は月1〜2本継続でよいか？</li>
+        <li>過去NGシリーズの<strong>2026年版再構成</strong>を優先してよいか？</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>推奨コンテンツ・ポートフォリオ（月15本の内訳案）</h3>
+  <table>
+    <tr>
+      <th>枠</th><th>本数/月</th><th>内容</th><th>狙い</th>
+    </tr>
+    <tr>
+      <td><strong>A. 鉄板日付・運勢</strong></td>
+      <td>4本</td>
+      <td>最強開運日／一粒万倍／天赦／月末運勢LIVE</td>
+      <td>スパイク再生・保存・登録</td>
+    </tr>
+    <tr>
+      <td><strong>B. 過去ヒット再構成</strong></td>
+      <td>5本</td>
+      <td>玄関・トイレ・寝室・キッチン・リビングNG 2026年版</td>
+      <td>実証済みCTR・ブラウジング</td>
+    </tr>
+    <tr>
+      <td><strong>C. 神道・数秘オンリーワン</strong></td>
+      <td>4本</td>
+      <td>産土様／破壊数横展開／お清め／守護</td>
+      <td>専門性・差別化</td>
+    </tr>
+    <tr>
+      <td><strong>D. 関係値・日常</strong></td>
+      <td>2本</td>
+      <td>素の話・習慣・コメント回答</td>
+      <td>リピーター・関係値</td>
+    </tr>
+  </table>
+
+  <h3>すぐ着手できる企画例（サムネ4語以内）</h3>
+
+  <div class="proposal priority">
+    <div class="proposal-head">
+      <div class="proposal-title">① 【2026年版】運気が大凶に…！玄関に置くと絶対NGなもの4選</div>
+      <span class="thumb">玄関NG4選</span>
+    </div>
+    <p class="muted">過去ヒット再現。期間中もカタログ再生が継続。生死感動×直し方で願望感動へ着地。</p>
+  </div>
+  <div class="proposal priority">
+    <div class="proposal-head">
+      <div class="proposal-title">② 破壊数チェック｜電話・住所・暗証番号の「運を奪う数字」</div>
+      <span class="thumb">破壊数チェック</span>
+    </div>
+    <p class="muted">期間No.1（9,067回・+74登録・CTR8.51%）。横展開（名前・車のナンバー等）でシリーズ化。</p>
+  </div>
+  <div class="proposal priority">
+    <div class="proposal-head">
+      <div class="proposal-title">③ 【保存版】◯月の最強開運日カレンダー（日付鉄板）</div>
+      <span class="thumb">今月の最強日</span>
+    </div>
+    <p class="muted">5/19開運日動画が+46登録。毎月の定番枠として固定し、投稿リズムの骨格にする。</p>
+  </div>
+  <div class="proposal">
+    <div class="proposal-head">
+      <div class="proposal-title">④ 産土様の見つけ方｜参拝ルール再編集版</div>
+      <span class="thumb">産土様の探し方</span>
+    </div>
+    <p class="muted">CTR7.95%と高い。神道専門性＝競合不在領域。オンリーワン強化。</p>
+  </div>
+  <div class="proposal">
+    <div class="proposal-head">
+      <div class="proposal-title">⑤ キッチン／洗面所NGシリーズ拡張</div>
+      <span class="thumb">キッチンNG5選</span>
+    </div>
+    <p class="muted">6/28キッチンNGが即2.7千回。場所を変えて同フォーマットを量産可能。</p>
+  </div>
+
+  <!-- 9. DECISIONS -->
+  <h2 id="s9">9. 本日の合意・ネクストアクション（案）</h2>
+  <table>
+    <tr>
+      <th>#</th><th>議題</th><th>提案</th><th>合意欄</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>投稿本数</td>
+      <td><strong>月15本に復帰</strong>（空白週ゼロ）</td>
+      <td>□ 合意　□ 要調整</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>企画方針</td>
+      <td>日付運勢＋過去ヒット再構成＋神道/数秘を主軸</td>
+      <td>□ 合意　□ 要調整</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>撮影オペ</td>
+      <td>まとめ撮りでバッファ確保（7/16撮影分の活用含む）</td>
+      <td>□ 合意　□ 要調整</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>KPIモニタ</td>
+      <td>次回定例で「本数／ヒット本数／純増登録／CTR」を固定報告</td>
+      <td>□ 合意　□ 要調整</td>
+    </tr>
+  </table>
+
+  <div class="card" style="background:var(--accent-soft);border-color:#d4a373;">
+    <h3 style="margin-top:0;color:var(--accent);">クロージング・メッセージ（会議用）</h3>
+    <p style="font-size:15px;line-height:1.8;">
+      「今は企画が悪いのではなく、<strong>離陸に必要なパワーが足りていない</strong>状態です。<br>
+      当たる型はすでにデータで見えています。あとは<strong>月15本の推力</strong>を取り戻し、<br>
+      鉄板の日付企画と過去ヒットを連続で出すことで、登録者減少を反転させましょう。」
+    </p>
+  </div>
+
+  <div class="footer">
+    中井耀香チャンネル〜運の源とつながる〜（<a href="https://www.youtube.com/@nakaiyouka" target="_blank" rel="noopener">youtube.com/@nakaiyouka</a>）｜定例MTG資料（契約後初回）｜分析期間 2026-05-19〜2026-07-15<br>
+    データ出典：YouTubeアナリティクス（合計／表データ／グラフデータ／性別・年齢データ）｜評価軸：再生率・視聴者維持率・トラフィックソース
+  </div>
+
+</div>
+
+<script>
+(function () {
+  // Daily views from 合計.csv (May 19 - Jul 14; Jul 15 may be absent in export)
+  const daily = [
+    ["05/19",3305],["05/20",1185],["05/21",473],["05/22",1709],["05/23",750],["05/24",428],["05/25",1196],
+    ["05/26",687],["05/27",440],["05/28",663],["05/29",376],["05/30",3325],["05/31",6063],
+    ["06/01",2904],["06/02",3251],["06/03",2139],["06/04",1360],["06/05",1177],["06/06",2395],["06/07",1208],
+    ["06/08",727],["06/09",1732],["06/10",761],["06/11",665],["06/12",1051],["06/13",648],["06/14",1038],
+    ["06/15",5979],["06/16",1816],["06/17",988],["06/18",1002],["06/19",2199],["06/20",1932],["06/21",1031],
+    ["06/22",664],["06/23",515],["06/24",553],["06/25",1872],["06/26",4529],["06/27",2850],["06/28",4498],
+    ["06/29",1351],["06/30",843],["07/01",746],["07/02",1926],["07/03",945],["07/04",757],["07/05",668],
+    ["07/06",677],["07/07",508],["07/08",468],["07/09",368],["07/10",362],["07/11",377],["07/12",359],
+    ["07/13",313],["07/14",330]
+  ];
+  const max = Math.max(...daily.map(d => d[1]));
+  const root = document.getElementById("dailyChart");
+  const spikes = new Set(["05/19","05/30","05/31","06/02","06/15","06/26","06/28","07/02"]);
+  daily.forEach(([label, v]) => {
+    const col = document.createElement("div");
+    col.className = "bar-col";
+    col.title = label + " : " + v.toLocaleString() + "回";
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    if (spikes.has(label)) bar.classList.add("spike");
+    if (label.startsWith("07/") && Number(label.slice(3)) >= 3) bar.classList.add("dry");
+    bar.style.height = Math.max(2, (v / max) * 100) + "%";
+    col.appendChild(bar);
+    root.appendChild(col);
+  });
+})();
+</script>
+</body>
+</html>
