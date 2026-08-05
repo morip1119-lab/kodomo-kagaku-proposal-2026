@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>mond占い師スクール｜調査まとめ</title>
+<style>
+  :root {
+    --ink: #132033;
+    --muted: #667085;
+    --line: #d8dee8;
+    --surface: #f5f7fa;
+    --blue: #185abd;
+    --blue-soft: #eaf2ff;
+    --green: #13795b;
+    --green-soft: #e7f6ef;
+    --amber: #945f00;
+    --amber-soft: #fff5dc;
+    --red: #b42318;
+    --red-soft: #ffebe9;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: #edf1f6;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    line-height: 1.55;
+  }
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: rgba(19, 32, 51, .94);
+  }
+  .toolbar a, .toolbar button {
+    border: 1px solid #607089;
+    border-radius: 5px;
+    padding: 6px 11px;
+    color: #fff;
+    background: transparent;
+    font-size: 9pt;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .deck { width: min(1120px, calc(100% - 32px)); margin: 22px auto 48px; }
+  .page {
+    min-height: 680px;
+    margin: 0 0 18px;
+    padding: 46px 52px;
+    background: #fff;
+    border: 1px solid var(--line);
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+  .eyebrow {
+    margin-bottom: 8px;
+    color: var(--blue);
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+  h1 { margin: 0; font-size: 27pt; line-height: 1.25; letter-spacing: -.02em; }
+  h2 { margin: 0 0 18px; font-size: 20pt; line-height: 1.3; }
+  h3 { margin: 18px 0 8px; font-size: 12pt; }
+  p { margin: 6px 0 12px; }
+  ul { margin: 8px 0; padding-left: 1.3em; }
+  li { margin: 5px 0; }
+  .muted { color: var(--muted); }
+  .small { color: var(--muted); font-size: 8.5pt; }
+  .lead { max-width: 880px; font-size: 14pt; line-height: 1.65; }
+  .title-page {
+    display: flex;
+    min-height: 680px;
+    flex-direction: column;
+    justify-content: space-between;
+    border-left: 13px solid var(--blue);
+  }
+  .title-meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10pt;
+  }
+  .agenda { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 36px; }
+  .agenda-item { padding: 18px; border-top: 4px solid var(--blue); background: var(--surface); }
+  .agenda-num { color: var(--blue); font-size: 9pt; font-weight: 700; }
+  .agenda-title { margin-top: 6px; font-size: 12pt; font-weight: 700; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0 22px; }
+  .kpi { min-height: 96px; padding: 15px; border: 1px solid var(--line); background: var(--surface); }
+  .kpi.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+  .kpi.good { background: var(--green-soft); border-color: #9fd0bc; }
+  .kpi.warn { background: var(--amber-soft); border-color: #e2c57a; }
+  .kpi-value { font-size: 20pt; font-weight: 700; line-height: 1.15; }
+  .kpi-label { margin-top: 7px; font-size: 8.5pt; }
+  .kpi-note { margin-top: 4px; font-size: 7.5pt; opacity: .8; }
+  .callout {
+    margin: 16px 0 0;
+    padding: 14px 18px;
+    border-left: 5px solid var(--blue);
+    background: var(--blue-soft);
+  }
+  .callout.warn { border-left-color: var(--amber); background: var(--amber-soft); }
+  .callout.good { border-left-color: var(--green); background: var(--green-soft); }
+  .callout.bad { border-left-color: var(--red); background: var(--red-soft); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .panel { padding: 16px; border: 1px solid var(--line); background: #fff; }
+  .panel.soft { background: var(--surface); }
+  .panel h3 { margin-top: 0; }
+  table { width: 100%; margin: 10px 0 14px; border-collapse: collapse; font-size: 8.8pt; }
+  th { padding: 8px; border-bottom: 2px solid #aeb8c7; background: var(--surface); text-align: left; }
+  td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .tag {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 10px;
+    color: var(--blue);
+    background: var(--blue-soft);
+    font-size: 7.5pt;
+    font-weight: 700;
+  }
+  .tag.green { color: var(--green); background: var(--green-soft); }
+  .tag.amber { color: var(--amber); background: var(--amber-soft); }
+  .tag.red { color: var(--red); background: var(--red-soft); }
+  .flow { display: flex; align-items: stretch; gap: 7px; margin: 18px 0; }
+  .flow-step {
+    display: flex;
+    min-height: 68px;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #9cb9e4;
+    color: var(--blue);
+    background: var(--blue-soft);
+    font-size: 10pt;
+    font-weight: 700;
+    text-align: center;
+  }
+  .arrow { align-self: center; color: var(--muted); font-weight: 700; }
+  .phase {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .phase:last-child { border-bottom: 0; }
+  .phase-num { color: var(--blue); font-size: 9pt; font-weight: 700; }
+  .phase-title { font-weight: 700; }
+  .num-box {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: var(--blue);
+    font-weight: 700;
+  }
+  .why-row {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .why-row:last-child { border-bottom: 0; }
+  .vs {
+    display: grid;
+    grid-template-columns: 1fr 48px 1fr;
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 8px;
+  }
+  .vs-mid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  @media (max-width: 900px) {
+    .page { padding: 30px 24px; }
+    .agenda, .kpis, .two-col, .three-col, .four-col, .vs { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .arrow { transform: rotate(90deg); }
+  }
+  @media print {
+    @page { size: A4 landscape; margin: 8mm; }
+    body { background: #fff; font-size: 8pt; line-height: 1.3; }
+    .toolbar { display: none; }
+    .deck { width: 100%; margin: 0; }
+    .page {
+      min-height: 0;
+      height: 190mm;
+      margin: 0;
+      padding: 8mm 10mm;
+      border: 0;
+      overflow: hidden;
+      break-after: page;
+    }
+    .title-page { min-height: 190mm; }
+    h1 { font-size: 22pt; }
+    h2 { margin-bottom: 10px; font-size: 15pt; }
+    .lead { font-size: 11pt; }
+    table { font-size: 7.2pt; }
+    th, td { padding: 5px 6px; }
+  }
+</style>
+</head>
+<body>
+<nav class="toolbar">
+  <a href="#why">なぜやるか</a>
+  <a href="#market">市場</a>
+  <a href="#win">勝ち筋</a>
+  <a href="#comp">競合</a>
+  <a href="#visit">潜入</a>
+  <a href="#ads">広告</a>
+  <a href="#offer">商品設計</a>
+  <a href="#team">講師</a>
+  <a href="#next">次やること</a>
+  <button type="button" onclick="window.print()">PDF保存・印刷</button>
+</nav>
+
+<main class="deck">
+
+  <!-- 01 COVER -->
+  <section class="page title-page">
+    <div>
+      <div class="eyebrow">External Briefing / Research Recap</div>
+      <h1>mond占い師スクール<br>これまでの調査まとめ</h1>
+      <p class="lead">
+        占術を教える学校ではなく、<strong>「占いで食えるようにする」学校</strong>をつくる。
+        社内調査の結論だけを、外部共有用に1本にまとめた資料です。
+      </p>
+      <div class="agenda">
+        <div class="agenda-item"><div class="agenda-num">01</div><div class="agenda-title">なぜこの事業か</div></div>
+        <div class="agenda-item"><div class="agenda-num">02</div><div class="agenda-title">市場と勝ち筋</div></div>
+        <div class="agenda-item"><div class="agenda-num">03</div><div class="agenda-title">競合の実態</div></div>
+        <div class="agenda-item"><div class="agenda-num">04</div><div class="agenda-title">商品・数字・次アクション</div></div>
+      </div>
+    </div>
+    <div class="title-meta">
+      <span>対象事業：mond占い師育成スクール</span>
+      <span>用途：外部協力会社との情報共有</span>
+      <span>出典：社内Notion（事業計画／競合調査／説明会記録／ヒアリング／集客SS）</span>
+    </div>
+  </section>
+
+  <!-- 02 WHY -->
+  <section class="page" id="why">
+    <div class="eyebrow">Why this business</div>
+    <h2>起点はシンプル。「占術」ではなく「稼ぐ」が足りない</h2>
+    <div class="two-col">
+      <div>
+        <div class="why-row">
+          <div class="num-box">1</div>
+          <div>
+            <div class="phase-title">mondには、実際に独立して稼いでいる占い師がいる</div>
+            <div class="small">相談件数・売上・フォロワー・継続率などの活動データもある。</div>
+          </div>
+        </div>
+        <div class="why-row">
+          <div class="num-box">2</div>
+          <div>
+            <div class="phase-title">「占い師として独立したい」人は増えている</div>
+            <div class="small">副業・個人事業の一般化が背景。</div>
+          </div>
+        </div>
+        <div class="why-row">
+          <div class="num-box">3</div>
+          <div>
+            <div class="phase-title">既存スクールは、占術指導で終わりがち</div>
+            <div class="small">「実際に稼げるようになるまで見る」競合が薄い。</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel soft">
+        <h3>現役占い師8名ヒアリング</h3>
+        <p style="font-size:28pt;font-weight:700;margin:4px 0 2px;line-height:1.1;">5 / 8</p>
+        <p>「占術より、発信・集客・ビジネス化の需要が一番高い」</p>
+        <p class="small">対象：駆け出し〜1年目 / 中堅3年超 / 伸び悩み層。スクール事業の存在は非開示。</p>
+        <div class="callout good">
+          <strong>結論：</strong>占術は手段。目的は「占いで食えるようになること」。
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      mondの勝ち方は「カリスマ先生1人の型」を売ることではない。
+      <strong>占術・集客・サロン化・LPなどを、各分野の実績者からまとめて学べるパッケージ</strong>をつくること。
+    </div>
+  </section>
+
+  <!-- 03 MARKET -->
+  <section class="page" id="market">
+    <div class="eyebrow">Market</div>
+    <h2>市場は大きい。年400〜500名の輩出は「出せない数字」ではない</h2>
+    <div class="kpis">
+      <div class="kpi primary"><div class="kpi-value">997億</div><div class="kpi-label">占いサービス市場</div><div class="kpi-note">矢野経済研究所 2023</div></div>
+      <div class="kpi"><div class="kpi-value">90% / 80%</div><div class="kpi-label">女性 / 30〜50代</div><div class="kpi-note">占い利用者の構成</div></div>
+      <div class="kpi"><div class="kpi-value">4.2兆</div><div class="kpi-label">スピリチュアル周辺市場</div><div class="kpi-note">関連市場まで含めた規模</div></div>
+      <div class="kpi warn"><div class="kpi-value">73%</div><div class="kpi-label">フリーランス年収99万以下</div><div class="kpi-note">1,303万人 / 20.3兆円市場の内訳</div></div>
+    </div>
+    <div class="two-col">
+      <div class="panel soft">
+        <h3>競合の輩出実績</h3>
+        <ul>
+          <li>セパ占いスクール：累計 <strong>3,000名</strong>（自己申告。第三者確認は取れていない）</li>
+          <li>鳥海流：延べ <strong>5,000名</strong>デビュー</li>
+          <li>年400〜500名規模は、市場的には十分あり得る</li>
+        </ul>
+      </div>
+      <div class="panel soft">
+        <h3>3C</h3>
+        <ul>
+          <li><strong>Customer</strong>：占いで独立したい人。または、既にやっているが伸びない占い師</li>
+          <li><strong>Competitor</strong>：ココナラ個人講座、既存占いスクール。上場ブランドも相互送客網もない</li>
+          <li><strong>Company</strong>：mondの占い師網・活動データ・上場ブランド（ハウテレビジョン 7064）・グロース知見</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 WIN -->
+  <section class="page" id="win">
+    <div class="eyebrow">Why mond</div>
+    <h2>mondが持てる優位は、この4つ</h2>
+    <div class="four-col">
+      <div class="panel soft">
+        <div class="tag">01 出口</div>
+        <h3>卒業後の場がある</h3>
+        <p>水月＝自分で集客。ハートフル＝直営店舗。mondはマッチング自体を既に持っている。</p>
+        <p class="small">学習中の実践鑑定 → 本番デビューまで、店舗や外部集客を挟まない。</p>
+      </div>
+      <div class="panel soft">
+        <div class="tag">02 決済</div>
+        <h3>高単価もデジタル完結</h3>
+        <p>競合は対面・振込で名付け・改名・鑑定書などを売っている。</p>
+        <p class="small">mondはスーパーレター等の既存課金で売れる。</p>
+      </div>
+      <div class="panel soft">
+        <div class="tag">03 発掘</div>
+        <h3>講師をデータで選べる</h3>
+        <p>競合は人脈・主観。mondはコメント数・フォロワー・売上でSQL抽出できる。</p>
+        <p class="small">カリスマ1人依存を避けられる。</p>
+      </div>
+      <div class="panel soft">
+        <div class="tag">04 集客</div>
+        <h3>実績がそのまま拡散素材</h3>
+        <p>回答実績がPF上に溜まる。SNSへ出しやすい。</p>
+        <p class="small">「集客の教え方」だけでなく「集客の場」も渡せる。</p>
+      </div>
+    </div>
+    <div class="vs">
+      <div class="panel">
+        <h3>競合の偏り</h3>
+        <ul>
+          <li>カリスマ講師1人依存</li>
+          <li>または占術中心</li>
+        </ul>
+      </div>
+      <div class="vs-mid">vs</div>
+      <div class="panel" style="border-color:#9cb9e4;background:var(--blue-soft);">
+        <h3>mondの置き方</h3>
+        <ul>
+          <li>専門家パネルを束ねる</li>
+          <li>上場企業ブランドも同時に持つ</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout warn">
+      社内合意：差別化の源泉は「mondという出口」そのものではない。
+      <strong>各分野の専門家を束ねられる関係値</strong>。mondは学ぶ場のひとつ、卒業後の唯一の出口ではない。
+    </div>
+  </section>
+
+  <!-- 05 COMPETITORS -->
+  <section class="page" id="comp">
+    <div class="eyebrow">Competitors</div>
+    <h2>本格コースはだいたい30〜80万円。出口の有無では差がつかない</h2>
+    <table>
+      <tr>
+        <th>競合</th>
+        <th>型</th>
+        <th>実勢価格</th>
+        <th>出口</th>
+        <th>集客</th>
+      </tr>
+      <tr>
+        <td>ハートフル</td>
+        <td>直営店舗</td>
+        <td>副業43.6万 / 本業54.3万 / カリスマ78.6万</td>
+        <td>直営13館（取り分50%）</td>
+        <td>無料説明会。「満席」訴求</td>
+      </tr>
+      <tr>
+        <td>セパ</td>
+        <td>就職予備校</td>
+        <td>46.8万（面談限定34.8万の例あり）</td>
+        <td>電話占い会社約600社紹介</td>
+        <td>LINE → 120分カウンセリング</td>
+      </tr>
+      <tr>
+        <td>水月良昭</td>
+        <td>個人カリスマ</td>
+        <td>通常48〜68万 / 当日38〜58万</td>
+        <td>なし（集客は自分）</td>
+        <td>Zoom相談で直接クロージング</td>
+      </tr>
+      <tr>
+        <td>鳥海流</td>
+        <td>師範ネットワーク</td>
+        <td>42.8万 → 割引32.8万</td>
+        <td>AI鑑定ツール＋師範制度</td>
+        <td>SNS＋無料動画LP。師範経由も</td>
+      </tr>
+      <tr>
+        <td>星占いの学校</td>
+        <td>広告ファネル</td>
+        <td>総額約50万</td>
+        <td>奥伝コースのみ実利コンテンツ</td>
+        <td>YouTube広告 → LINE → 無料動画 → セミナー</td>
+      </tr>
+      <tr>
+        <td>アカデメイア</td>
+        <td>カルチャースクール</td>
+        <td>1レッスン約3,300円＋入学金3.3万</td>
+        <td>認定ライセンス</td>
+        <td>無料セミナー・資料請求</td>
+      </tr>
+      <tr>
+        <td>占いアカデミー</td>
+        <td>自社エコシステム</td>
+        <td>養成 25万 / 面接攻略 45万</td>
+        <td>占い館体験入店</td>
+        <td>自社メディア経由のクロスセル</td>
+      </tr>
+      <tr>
+        <td>ゆりか</td>
+        <td>個人運営</td>
+        <td>体験3,000円。本講座は非公開</td>
+        <td>事務所紹介・認定講師（審査制）</td>
+        <td>ブログSEO / YouTube / LINE</td>
+      </tr>
+    </table>
+    <div class="three-col">
+      <div class="panel soft">
+        <h3>成長モデルは4つ</h3>
+        <ul>
+          <li>直営拡大型（ハートフル）</li>
+          <li>自社エコシステム型（アカデミー）</li>
+          <li>師範ネットワーク型（鳥海）</li>
+          <li>個人×広告ファネル型（水月・セーラ）</li>
+        </ul>
+      </div>
+      <div class="panel soft">
+        <h3>重要な発見</h3>
+        <p>主要社はどれも卒業後の「出口」を持っている。<strong>出口の有無だけでは差別化にならない。</strong></p>
+      </div>
+      <div class="panel soft">
+        <h3>実績の扱い</h3>
+        <p>セパの「累計3,000名」「合格率95〜98%」は第三者確認ゼロ。実名卒業生も0。急拡大スクールは評判が割れやすい。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 MYSTERY SHOP -->
+  <section class="page" id="visit">
+    <div class="eyebrow">Mystery shopping</div>
+    <h2>実際に説明会・個別面談まで入って分かったこと</h2>
+    <div class="two-col">
+      <div class="panel">
+        <div class="tag">2026/7/13</div>
+        <h3>セパ占いスクール</h3>
+        <ul>
+          <li>核は「お客様が求める言葉 × 占い師キャラクター」</li>
+          <li>挨拶→ヒアリング→鑑定→アドバイス→クロージングの語彙を固定</li>
+          <li>覚える語彙300＋地雷ワード。鑑定録音FBは無制限が売り</li>
+          <li>目標の見せ方：月15万 ＝ 時給3,000円 × 月50時間</li>
+          <li>出口：電話占い会社紹介。「会社選びを間違えると売れない」</li>
+        </ul>
+        <div class="callout warn">
+          当日クロージング前提。今月中決定で限定価格34.8万・12回分割手数料無料。
+        </div>
+      </div>
+      <div class="panel">
+        <div class="tag">公式資料あり</div>
+        <h3>ハートフルスクール</h3>
+        <ul>
+          <li>説明会は予約制・約40分。占い師お仕事講座は女性のみ</li>
+          <li>説明会メモ（一括29.9万）と公式価格は不一致 → <strong>公式資料を正とする</strong></li>
+          <li>想定より高い：副業43.6万 / 本業54.3万 / カリスマ78.6万</li>
+          <li>取り分約50%（電話占い業界はだいたい20%前後）</li>
+          <li>収入例も出す：週4で月109万、週2で月23.6万</li>
+          <li>定着率も出す：オンライン5人中2人、対面も1年後に残り2/5〜6</li>
+        </ul>
+        <div class="callout good">
+          「稼げなかった人」も開示する。信頼のつくり方として参考になる。AI練習アプリ「kanaeru」もあり。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 ADS -->
+  <section class="page" id="ads">
+    <div class="eyebrow">Ads &amp; compliance</div>
+    <h2>上場企業であることは、宣伝文句以上に「広告審査」で効く</h2>
+    <div class="two-col">
+      <div class="panel soft">
+        <h3>媒体別</h3>
+        <ul>
+          <li><strong>LINEヤフー広告</strong>：占いカテゴリは「国内上場」でクリア。ハウテレビジョン（7064）は該当。主要競合は非上場で使えない。</li>
+          <li><strong>Meta / Google / X</strong>：占い専用の禁止カテゴリはない。引っかかるのは訴求表現。</li>
+          <li><strong>TikTok</strong>：日本は条件付き許可（無条件は韓国のみ）。</li>
+          <li><strong>X</strong>：日本語ポリシーは古い。実務は英語版で判断。</li>
+        </ul>
+      </div>
+      <div class="panel soft">
+        <h3>そのまま出すと危ない表現</h3>
+        <ul>
+          <li>収入保証</li>
+          <li>個人属性の暗示</li>
+          <li>価格の非開示</li>
+          <li>「副業コース＝月10〜20万 / 本業＝月30〜80万」はそのまま出すと各社ポリシーに抵触しやすい</li>
+        </ul>
+        <h3>星占いの学校の実例</h3>
+        <p>Meta広告ライブラリで同名義が約26件中25件アクティブ。フロントは1,980円セミナー。支出額は非公開。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 OFFER -->
+  <section class="page" id="offer">
+    <div class="eyebrow">Offer design</div>
+    <h2>商品は1つ。広告の言い方だけ、2ペルソナで分ける</h2>
+    <div class="two-col">
+      <div class="panel" style="border-top:4px solid var(--blue);">
+        <div class="tag">ペルソナ① 初心者</div>
+        <h3>副業で占いを始めたい 30〜50代女性</h3>
+        <ul>
+          <li>例：元教員など</li>
+          <li>支払実績：累計30万前後（複数講座に分散）</li>
+          <li>欲しいもの：占術＋集客のワンストップ</li>
+          <li>広告：<strong>「副業で占い師デビュー」</strong></li>
+        </ul>
+      </div>
+      <div class="panel" style="border-top:4px solid var(--amber);">
+        <div class="tag amber">ペルソナ② 売れない占い師</div>
+        <h3>活動しているが稼げていない層</h3>
+        <ul>
+          <li>支払実績：他社高単価講座を一括45万など</li>
+          <li>支払意欲は高い</li>
+          <li>欲しいもの：稼ぐ再現性（集客・サロン化）</li>
+          <li>広告：<strong>「売れる占い師になる」</strong></li>
+        </ul>
+      </div>
+    </div>
+    <h3>カリキュラム案（4層）</h3>
+    <div class="four-col">
+      <div class="panel soft"><h3>座学</h3><p>占術15 / 鑑定5 / マーケ10 / SNS5。1本5,000〜2万円想定。</p></div>
+      <div class="panel soft"><h3>実践</h3><p>鑑定練習会、FB、SNS運用FB。</p></div>
+      <div class="panel soft"><h3>コンサル</h3><p>1on1、チャット、出口相談。看板講師1on1は受け放題案。</p></div>
+      <div class="panel soft"><h3>コミュニティ</h3><p>月次ライブ、メンバー限定チャット。</p></div>
+    </div>
+    <div class="flow">
+      <div class="flow-step">0 導入<br><span class="small" style="font-weight:600;color:var(--muted);">適性診断・口座連携</span></div>
+      <div class="arrow">→</div>
+      <div class="flow-step">1 基礎<br><span class="small" style="font-weight:600;color:var(--muted);">1〜2ヶ月 主力占術</span></div>
+      <div class="arrow">→</div>
+      <div class="flow-step">2 実践<br><span class="small" style="font-weight:600;color:var(--muted);">3〜4ヶ月 mond鑑定</span></div>
+      <div class="arrow">→</div>
+      <div class="flow-step">3 デビュー<br><span class="small" style="font-weight:600;color:var(--muted);">5ヶ月 有料鑑定</span></div>
+      <div class="arrow">→</div>
+      <div class="flow-step">4 伴走<br><span class="small" style="font-weight:600;color:var(--muted);">6ヶ月〜 コミュニティ</span></div>
+    </div>
+    <p class="small">ハートフルは6〜10ヶ月で店舗デビュー。水月は2ヶ月で個人デビューだが集客は自分次第。mondは学習と収益化を並走させる。</p>
+  </section>
+
+  <!-- 09 PRICE -->
+  <section class="page">
+    <div class="eyebrow">Price &amp; target</div>
+    <h2>価格は「表示50万 → 面談で35万」。数字の穴はCAC</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="kpi-value">50万</div><div class="kpi-label">表示価格</div><div class="kpi-note">競合の表向きもこの帯</div></div>
+      <div class="kpi primary"><div class="kpi-value">35万</div><div class="kpi-label">実勢単価（仮説）</div><div class="kpi-note">セパ・水月と同じ限定価格型</div></div>
+      <div class="kpi good"><div class="kpi-value">8,000万</div><div class="kpi-label">mond取り分目標</div><div class="kpi-note">総売上 約1.14億（7:3想定）</div></div>
+      <div class="kpi warn"><div class="kpi-value">326名</div><div class="kpi-label">必要成約</div><div class="kpi-note">5ヶ月で月65名ペース</div></div>
+    </div>
+    <div class="two-col">
+      <div class="panel soft">
+        <h3>価格の置き方</h3>
+        <ul>
+          <li>競合実勢：27〜79万</li>
+          <li>独学で占術一式を揃える実費：0〜40万</li>
+          <li>複数社が「説明会参加者限定で35〜40万」に下げてクロージング</li>
+        </ul>
+      </div>
+      <div class="panel soft">
+        <h3>まだ出ていない数字</h3>
+        <ul>
+          <li>LTV / CAC / LTV÷CAC / 回収期間</li>
+          <li>集客チャネル別のCAC検証が次の仕事</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout warn">
+      目標8,000万は「mond取り分」。占い師側3割を入れると総売上は約1.14億。単価35万なら326成約が必要。
+    </div>
+  </section>
+
+  <!-- 10 TEAM -->
+  <section class="page" id="team">
+    <div class="eyebrow">Instructors</div>
+    <h2>看板は四柱イさん。専門講師はデータで複数置く</h2>
+    <div class="two-col">
+      <div class="panel" style="border-top:4px solid var(--blue);">
+        <h3>看板候補：四柱イさん</h3>
+        <ul>
+          <li>オンラインサロン月商約600万（運営に自社関与）</li>
+          <li>「占術は教えられるが、本人は稼げていない先生」が多い中、稼ぐ全体設計まで体現している</li>
+          <li>役割案：看板・監修、特別講義、要所FB。集客・制作・決済・サポートは自社</li>
+          <li>条件案：監修ライト / 看板・共創（推奨） / 共同事業。レートは法務・会計確認後</li>
+        </ul>
+      </div>
+      <div class="panel soft">
+        <h3>専門講師の選び方</h3>
+        <p>タロット・手相・西洋占星術・数秘術などは、フォロワー・売上・直近活動でSQL抽出し複数名選定。水月型の「講師1人依存」を避ける。</p>
+        <h3>mond活躍中リスト（抜粋）</h3>
+        <p class="small">他に100名以上利用。関係性・影響力でまずこの面々。</p>
+        <table>
+          <tr><th>名前</th><th>X</th></tr>
+          <tr><td>四柱イさん</td><td>@4chui5</td></tr>
+          <tr><td>あらいちゅー</td><td>@araichuu</td></tr>
+          <tr><td>華月エアリ</td><td>@KagetsuAiry</td></tr>
+          <tr><td>トナカイ</td><td>@santona_tonakai</td></tr>
+          <tr><td>アメミヤ レイ</td><td>@r_amemiya</td></tr>
+          <tr><td>マリリン</td><td>@maririn_uranai</td></tr>
+          <tr><td>星標</td><td>@starsignpost1</td></tr>
+          <tr><td>アライさん</td><td>@araarafene</td></tr>
+          <tr><td>スピカ</td><td>@pepegumi</td></tr>
+          <tr><td>あつし / みゃーず / きつねさま / 九蓮梓 / 高橋桐矢 / 萩原八雲</td><td>ほか</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 NEXT -->
+  <section class="page" id="next">
+    <div class="eyebrow">Next</div>
+    <h2>いま決まっていること / まだ決まっていないこと</h2>
+    <div class="two-col">
+      <div class="panel" style="background:var(--green-soft);border-color:#9fd0bc;">
+        <h3>決まっていること</h3>
+        <ul>
+          <li>売るものは「稼ぐ力」。占術単体ではない</li>
+          <li>商品は1パッケージ。広告だけペルソナ別に出す</li>
+          <li>看板＋専門家パネル。1人カリスマ依存にしない</li>
+          <li>価格仮説は表示50万 / 実勢35万</li>
+          <li>mond取り分8,000万が売上目標</li>
+          <li>堀は「専門家を束ねられる関係値」</li>
+        </ul>
+      </div>
+      <div class="panel" style="background:var(--amber-soft);border-color:#e2c57a;">
+        <h3>次に埋める穴</h3>
+        <ul>
+          <li>チャネル別CACの検証</li>
+          <li>LTV・回収期間の算出</li>
+          <li>四柱イさん条件の確定（法務・会計）</li>
+          <li>広告クリエイティブの表現設計（収入保証回避）</li>
+          <li>説明会〜面談の営業設計（当日限定価格をやるか）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      外部と進めるときの共通認識：<strong>「占いを教える学校」ではなく「占いで独立できる状態まで連れていく学校」</strong>。
+      競合比較・価格・出口の話は、この一文に全部つながる。
+    </div>
+    <p class="small" style="margin-top:28px;">出典：社内Notion（事業計画書 / 各競合調査 / 説明会参加記録 / 占い師ヒアリング / 集客関連スプレッドシート）</p>
+  </section>
+
+</main>
+</body>
+</html>
