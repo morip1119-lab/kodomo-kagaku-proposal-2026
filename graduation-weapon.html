@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>卒業制作図解｜YouTube案件管理シート</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --line: #334155;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent2: #a78bfa;
+      --ok: #34d399;
+      --warn: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1e3a5f 0%, var(--bg) 55%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      border: 1px solid #0ea5e9;
+      border-radius: 999px;
+      padding: 4px 12px;
+      margin-bottom: 14px;
+    }
+    h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .lead { color: var(--muted); font-size: 15px; margin-bottom: 28px; max-width: 42em; }
+    section {
+      background: rgba(30, 41, 59, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px 22px 20px;
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    p, li { font-size: 14px; color: #e2e8f0; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 6px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } h1 { font-size: 22px; } }
+    .card {
+      background: #0f172a;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .card strong { color: var(--accent2); display: block; margin-bottom: 6px; font-size: 13px; }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .flow span {
+      background: #0f172a;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .flow .arrow { border: none; background: transparent; color: var(--muted); padding: 0 2px; }
+    .mock {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f8fafc;
+      color: #0f172a;
+      margin-top: 10px;
+    }
+    .mock-top {
+      background: #e2e8f0;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+    }
+    .mock-body {
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr 1.1fr;
+      min-height: 160px;
+      font-size: 11px;
+    }
+    .mock-col { padding: 10px; border-right: 1px solid #e2e8f0; }
+    .mock-col:last-child { border-right: none; }
+    .mock-title { font-weight: 800; font-size: 12px; margin-bottom: 8px; color: #0f172a; }
+    .chip {
+      display: block;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 6px 8px;
+      margin-bottom: 6px;
+      color: #1e3a8a;
+    }
+    .chip.dim { background: #f1f5f9; border-color: #e2e8f0; color: #475569; }
+    .tag-ok { color: var(--ok); font-weight: 700; }
+    .tag-warn { color: var(--warn); font-weight: 700; }
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .nav a:hover { color: var(--text); border-color: var(--line); }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="#made">作ったもの</a>
+    <a href="#pain">解決する面倒</a>
+    <a href="#why">作った理由</a>
+    <a href="#craft">工夫と苦戦</a>
+    <a href="#demo">発表デモ</a>
+  </nav>
+
+  <div class="wrap">
+    <div class="badge">卒業制作｜自分の武器を作る</div>
+    <h1>YouTube案件管理シート<br />— 複数チャンネル運営の「散らかる面倒」を消す武器</h1>
+    <p class="lead">
+      YouTubeクライアントを複数抱える運営の現場で、打ち合わせ準備・宿題の抜け漏れ・登録者確認が毎回バラバラだった。
+      それを1画面に集約し、毎日の確認コストを下げる仕組みを作った。
+    </p>
+
+    <section id="made">
+      <h2>01 · 作ったもの</h2>
+      <h3>YouTube案件管理シート（運営OS）</h3>
+      <p>ブラウザで開く案件管理ツール。チャンネル・活動履歴・詳細アクションを3カラムで見る。</p>
+      <div class="mock" aria-label="画面イメージ">
+        <div class="mock-top">youtube-channel-manager.html（画面イメージ）</div>
+        <div class="mock-body">
+          <div class="mock-col">
+            <div class="mock-title">チャンネル</div>
+            <span class="chip">くすのき · 3,290人</span>
+            <span class="chip">中井耀香 · 1.69万人</span>
+            <span class="chip dim">死の授業 · 785人</span>
+            <span class="chip dim">マーケ侍 · 10.9万人</span>
+          </div>
+          <div class="mock-col">
+            <div class="mock-title">活動履歴</div>
+            <span class="chip">定例打ち合わせ 08/24</span>
+            <span class="chip dim">初回打ち合わせ</span>
+            <span class="chip dim">Q1振り返り</span>
+          </div>
+          <div class="mock-col">
+            <div class="mock-title">詳細 / ToDo</div>
+            <span class="chip">決定事項</span>
+            <span class="chip">次回ToDo（期限切れ強調）</span>
+            <span class="chip dim">登録者自動更新</span>
+          </div>
+        </div>
+      </div>
+      <div class="flow" style="margin-top:16px">
+        <span>7チャンネル管理</span>
+        <span class="arrow">→</span>
+        <span>議事録・決定・ToDo</span>
+        <span class="arrow">→</span>
+        <span>登録者 毎日12時取得</span>
+        <span class="arrow">→</span>
+        <span>週次レポート</span>
+      </div>
+    </section>
+
+    <section id="pain">
+      <h2>02 · 解決する面倒・課題</h2>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Before（面倒）</strong>
+          <ul>
+            <li>打ち合わせ前に、メモ・スプレッド・Studioを行き来する</li>
+            <li>「前回何を決めたか」を探す時間が毎回かかる</li>
+            <li>宿題が口頭で消え、1週間後に気づく</li>
+            <li>登録者数の確認が手作業で、数字の鮮度がバラバラ</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>After（武器）</strong>
+          <ul>
+            <li>チャンネルを選ぶ → 履歴 → 決定事項 → ToDo が一直線</li>
+            <li>期限切れToDoが一目で分かる</li>
+            <li>登録者はAPIで毎日自動更新</li>
+            <li>週次レポートで「止まっている案件」を見える化</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:12px;color:var(--muted)">使う場面：クライアント定例の前夜・当日、週初の進捗確認、チーム内の引き継ぎ。</p>
+    </section>
+
+    <section id="why">
+      <h2>03 · 作りたいと思った理由</h2>
+      <p>
+        YouTube運営は「企画が弱い」より先に、<span class="tag-warn">決めたことが実行されない</span>で数字が落ちることが多い。
+        自分の仕事では、複数チャンネルの定例準備と宿題管理がボトルネックだった。
+        AIで企画を出す前に、<strong>運営の土台（進捗・議事・数字）を一つの武器にする</strong>必要があると感じた。
+      </p>
+      <p style="margin-top:10px;color:var(--muted)">
+        半年間で学んだ「面倒を分解して消す」「小さく作って使う」を、自分の本業にそのまま当てはめた。
+      </p>
+    </section>
+
+    <section id="craft">
+      <h2>04 · 工夫したポイント / 苦戦したポイント</h2>
+      <div class="grid-2">
+        <div class="card">
+          <strong class="tag-ok">工夫したこと</strong>
+          <ul>
+            <li>3カラムUI：選ぶ→見る→動く、の導線を固定</li>
+            <li>議事録からToDoを自動集約（7日未着手は期限切れ表示）</li>
+            <li>登録者は YouTube Data API で毎日12時自動取得</li>
+            <li>file:// でも動くよう JSON + JS埋め込みで同期</li>
+            <li>既存データに新チャンネルをマージ（リセット不要）</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong class="tag-warn">苦戦したこと</strong>
+          <ul>
+            <li>Studioの深い数字（維持率・流入）は OAuth が必要で、APIキーだけでは取れない</li>
+            <li>クライアントごとにオーナー認可が必要な壁</li>
+            <li>ローカル保存と自動取得の反映タイミング（キャッシュ・未保存）</li>
+            <li>「全部自動化」より「まず毎日使う画面」を優先する判断</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <h2>05 · 発表で見せること（6分用）</h2>
+      <ol style="padding-left:1.2em">
+        <li style="margin-bottom:8px"><strong>仕事の前提（60秒）</strong> — 複数YouTubeチャンネルを運営している</li>
+        <li style="margin-bottom:8px"><strong>面倒（60秒）</strong> — 定例前の情報探し・宿題抜け・数字確認</li>
+        <li style="margin-bottom:8px"><strong>デモ（2分）</strong> — チャンネル選択 → 履歴 → ToDo → 登録者</li>
+        <li style="margin-bottom:8px"><strong>仕組み（60秒）</strong> — API自動取得・週次レポート・今後Analytics</li>
+        <li style="margin-bottom:8px"><strong>学び（60秒）</strong> — 小さく作って使い、止まる場所を潰した</li>
+      </ol>
+      <p style="margin-top:8px;color:var(--muted)">個人名・機密は一般化して話す。クライアント固有の中身は深入りしない。</p>
+    </section>
+
+    <p class="footer">卒業制作図解 · YouTube AI Operator / 案件管理シート</p>
+  </div>
+</body>
+</html>
