@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3ヶ月目課題図解｜YouTube案件管理シート</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #fff;
+      --line: #e5e7eb;
+      --text: #111827;
+      --muted: #6b7280;
+      --ink: #1f2937;
+      --blue: #1d4ed8;
+      --ok: #166534;
+      --warn: #92400e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(246,247,251,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+      padding: 10px 16px;
+    }
+    .nav a {
+      color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 700;
+      padding: 6px 10px; border-radius: 999px;
+    }
+    .nav a:hover { color: var(--text); background: #fff; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
+    .badge {
+      display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+      color: var(--blue); border: 1px solid #93c5fd; background: #eff6ff;
+      border-radius: 999px; padding: 4px 12px; margin-bottom: 12px;
+    }
+    h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .lead { color: var(--muted); font-size: 15px; margin-bottom: 24px; max-width: 44em; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    p, li { font-size: 14px; }
+    ul, ol { padding-left: 1.2em; }
+    li { margin-bottom: 6px; }
+    .shot {
+      width: 100%; border: 1px solid var(--line); border-radius: 12px;
+      background: #f8fafc; display: block; margin: 12px 0 8px;
+    }
+    .caption { font-size: 12px; color: var(--muted); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    @media (max-width: 720px) {
+      .grid-2, .grid-4 { grid-template-columns: 1fr; }
+      h1 { font-size: 22px; }
+    }
+    .card {
+      background: #f8fafc; border: 1px solid var(--line);
+      border-radius: 12px; padding: 14px;
+    }
+    .card strong { display: block; margin-bottom: 6px; font-size: 13px; color: var(--blue); }
+    .ok { color: var(--ok); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    .talk li { margin-bottom: 10px; }
+    .footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="#screen">画面キャプチャ</a>
+    <a href="#problem">解決する課題</a>
+    <a href="#craft">工夫</a>
+    <a href="#hard">苦戦</a>
+    <a href="#talk">5分発表</a>
+  </nav>
+
+  <div class="wrap">
+    <div class="badge">3ヶ月目｜ひな形を自分の画面に仕上げる</div>
+    <h1>YouTube案件管理シート</h1>
+    <p class="lead">
+      第5回ワークの「3〜4ペインの絵」を、自分の仕事用の画面にした。
+      複数チャンネルの定例・宿題・数字が散らばるのを、1画面で「選ぶ → 見る → 動く」にする。
+      今月のゴールは見た目。データの本格保存は4ヶ月目。
+    </p>
+
+    <section id="screen">
+      <h2>01 · ツールの画面のキャプチャ</h2>
+      <h3>4ペインで仕事の情報を並べた</h3>
+      <p>自分の仕事で毎日見るものを、左から右へ固定した。</p>
+      <div class="grid-4" style="margin: 14px 0;">
+        <div class="card"><strong>① チャンネル</strong>案件を選ぶ。登録者とフェーズが見える。</div>
+        <div class="card"><strong>② 活動履歴</strong>定例や打ち合わせの記録。</div>
+        <div class="card"><strong>③ 詳細 / ToDo</strong>決定事項と、次に動く宿題。</div>
+        <div class="card"><strong>④ 動画企画</strong>撮影・公開の進捗表。</div>
+      </div>
+      <img class="shot" src="./yt-mgr-screen.png" alt="YouTube案件管理シートの画面キャプチャ。チャンネル・履歴・詳細の3カラムと企画表。" />
+      <p class="caption">画面キャプチャ（見た目確認用）。クライアント固有の中身は、発表では一般化して話す。</p>
+    </section>
+
+    <section id="problem">
+      <h2>02 · ツールで解決できる課題</h2>
+      <h3>定例前の「情報探し」と、宿題の抜け漏れ</h3>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Before</strong>
+          <ul>
+            <li>メモ・スプレッド・Studioを行き来する</li>
+            <li>前回の決定を探す時間が毎回かかる</li>
+            <li>宿題が口頭で消え、1週間後に気づく</li>
+            <li>登録者確認が手作業で、数字の鮮度がバラバラ</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>After</strong>
+          <ul>
+            <li>チャンネルを選ぶと、履歴→決定→ToDoが一直線</li>
+            <li>7日未着手のToDoが目立つ</li>
+            <li>週次1枚で「止まっている案件」が見える</li>
+            <li>画面を開けば、次に何をするか分かる</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:12px;color:var(--muted)">使う場面：クライアント定例の前夜・当日、週初の進捗確認、チームへの引き継ぎ。</p>
+    </section>
+
+    <section id="craft">
+      <h2>03 · 工夫したポイント</h2>
+      <ul>
+        <li><span class="ok">導線を固定した。</span> 4ペインを増やしすぎず、「選ぶ → 見る → 動く」だけにした。</li>
+        <li><span class="ok">宿題を口頭で終わらせない。</span> 議事録のToDoを右ペインに集め、7日止まると期限切れ表示にした。</li>
+        <li><span class="ok">評価の軸を決めた。</span> 再生数ではなく、実行（撮影）・ToDo・公開まで通ったかを見る。</li>
+        <li><span class="ok">今月は見た目を先に完成させた。</span> 保存やOAuthは後回し。毎日開ける画面を優先した。</li>
+      </ul>
+    </section>
+
+    <section id="hard">
+      <h2>04 · 苦戦したポイント</h2>
+      <ul>
+        <li><span class="warn">全部入れたくなった。</span> Analytics連携や自動保存まで一気にやると、画面の説明ができなくなる。見た目に切った。</li>
+        <li><span class="warn">Studioの深い数字は取れない。</span> 再生率・流入はAPIキーだけでは足りず、チャンネルオーナーのOAuthが必要だった。</li>
+        <li><span class="warn">情報をどこに置くか迷った。</span> 週次レポートを4ペインの外に出した。上は「今週の論点」、下は「案件の中」と分けた。</li>
+        <li><span class="warn">固有名の扱い。</span> 実案件で作っているので、提出・発表では一般化して話す判断をした。</li>
+      </ul>
+    </section>
+
+    <section id="talk">
+      <h2>05 · 5分発表メモ</h2>
+      <ol class="talk">
+        <li><strong>どんな画面にしたか（90秒）</strong> — 4ペイン。左でチャンネル、中央で履歴、右でToDo、下で企画。選んだ案件の「次の一手」が見える。</li>
+        <li><strong>何を解決するか（90秒）</strong> — 企画不足より先に、決めたことが実行されない。探す時間を減らして、前に進める時間を増やす。</li>
+        <li><strong>作ってみた感想（2分）</strong> — 面倒だったのは「全部自動化したくなること」。もっとやりたかったのはAnalytics連携。今月は見た目を完成させ、保存は4ヶ月目に回す。</li>
+      </ol>
+      <p class="caption" style="margin-top:10px">話すときは画面共有でこの図解を開き、キャプチャを指しながら進める。</p>
+    </section>
+
+    <p class="footer">3ヶ月目課題図解 · YouTube案件管理シート · 画面の見た目を仕上げる</p>
+  </div>
+</body>
+</html>
